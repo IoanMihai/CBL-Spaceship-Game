@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Player extends JPanel {
+public class Player {
     private final int SPEED = 10;
     private final int Y;
     private int x;
@@ -29,13 +29,13 @@ public class Player extends JPanel {
         }
     }
 
-    @Override
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
+    public void draw(Graphics g){
         g.setColor(Color.BLUE);
         g.fillRect(x, Y, 50, 50);
-        
     }
 
+    public int getX(){
+        return x;
+    }
 
 }
