@@ -6,6 +6,7 @@ public class Projectile {
     private final int SPEED = 10;
     private final int X;
     private int y;
+    private Rectangle rectangle;
 
     public Projectile(int x, int y) {
         this.X = x;
@@ -18,7 +19,12 @@ public class Projectile {
 
     public void draw(Graphics g){
         g.setColor(Color.RED);
+        rectangle = new Rectangle(X, y, 10, 30);
         g.fillRect(X, y, 10, 30);
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
     }
 
     public int getY() {
