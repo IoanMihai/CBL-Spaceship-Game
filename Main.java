@@ -56,7 +56,9 @@ class Menu implements ActionListener {
         playButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO: go to next frame
+                frame.setVisible(false);
+                Game game = new Game();
+                game.builIt();
             }
         });
 
