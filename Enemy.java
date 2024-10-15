@@ -18,12 +18,16 @@ public class Enemy {
     private File enemyImage;
     private Rectangle rectangle;
     private boolean isAlive = true;
+    private int SPEED = 5;
+    private final int WIDTH = 1080;
+    private boolean movingDirection;
 
     Enemy(int h, int d, int initialX, int initialY) {
         this.health = h;
         this.damage = d;
         this.x = initialX;
         this.y = initialY;
+        this.movingDirection = false;
         // enemyImage = image;
     }   
 
@@ -57,6 +61,21 @@ public class Enemy {
 
     public void kill() {
         isAlive = false;
+    }
+
+    public void move() {
+        
+        if (x > WIDTH - 50) {
+            movingDirection = !movingDirection;
+        } else if (x < 0) {
+            movingDirection = !movingDirection;
+        }
+
+        if (movingDirection) {
+            x += SPEED;
+        } else {
+            x -= SPEED;
+        }
     }
 
 }

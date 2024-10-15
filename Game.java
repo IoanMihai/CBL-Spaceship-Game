@@ -22,7 +22,7 @@ public class Game extends JPanel implements ActionListener {
             this.setFocusable(true);
             this.addKeyListener(keyInput);
 
-            gameWindow.setSize(1080,720);
+            gameWindow.setSize(1080, 720);
             gameWindow.setVisible(true);
             gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -58,6 +58,10 @@ public class Game extends JPanel implements ActionListener {
             keyInput.resetKey();
         }
 
+        for (Enemy enemy : enemies) {
+            enemy.move();
+        }
+
         ArrayList<Projectile> tempProjectiles = new ArrayList<>();
         for (Projectile projectile: projectiles) {
             projectile.update();
@@ -71,14 +75,24 @@ public class Game extends JPanel implements ActionListener {
                     if (enemy.getRectangle() != null) {
                         if (projectile.getRectangle().intersects(enemy.getRectangle())) {
                             enemy.setHealth(enemy.getHealth() - 5);
+                            if (enemy.isAlive()) {
+                                tempProjectiles.remove(projectile);
+                            }
                         }
                     }
                     if (enemy.getHealth() <= 0) {
                         enemy.kill();
+                        player.increaseScore();
                     }
                 }
             }
         }
+
+        if (!areThereMoreEnemies(enemies)) {
+            enemies.clear();
+            enemies = createEnemies();
+        }
+
         projectiles = tempProjectiles;
         System.out.println(projectiles.size());
         gameWindow.repaint();
@@ -86,10 +100,19 @@ public class Game extends JPanel implements ActionListener {
 
     public ArrayList<Enemy> createEnemies() {
         ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-        for (int i = 0; i <= 8; i ++) {
-            enemyList.add(new Enemy(10, 10, 100*i + 100, 30));
+        for (int i = 0; i <= 8; i++) {
+            enemyList.add(new Enemy(10, 10, 100 * i + 100, 30));
         }
 
         return enemyList;
+    }
+
+    public boolean areThereMoreEnemies(ArrayList<Enemy> enemyList) {
+        for (Enemy e : enemyList) {
+            if (e.isAlive()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
