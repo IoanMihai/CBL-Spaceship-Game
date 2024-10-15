@@ -7,12 +7,14 @@ public class Player {
     private final int Y;
     private int x;
     private final int WIDTH;
+    private int score;
 
 
     public Player(int startX, int startY, int width){
         this.x = startX;
         this.Y = startY;
         this.WIDTH = width;
+        this.score = 0;
     }
 
     public void move(boolean dir){
@@ -36,6 +38,14 @@ public class Player {
 
     public int getX(){
         return x;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void increaseScore() {
+        score++;
     }
 
 }
