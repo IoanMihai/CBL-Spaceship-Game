@@ -38,6 +38,7 @@ public class Game extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        keyInput.reduceTime();
         char keyPressed = keyInput.getKey();
         char direction = keyInput.getDir();
         if(direction == 'a') {

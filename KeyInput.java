@@ -5,25 +5,32 @@ import javax.swing.*;
 public class KeyInput implements KeyListener{
     private char key;
     private char dir;
+    private int timer;
 
     public KeyInput() {
         key = '\u0000';
         dir = '\u0000';
+        timer = 0;
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyChar() == 'a' || e.getKeyChar() == 'd') {
             dir = e.getKeyChar();
+        } 
+        
+        if (timer == 0) {
+            key = e.getKeyChar();
         }
-        key = e.getKeyChar();
     }
     @Override
     public void keyTyped(KeyEvent e) { 
         if(e.getKeyChar() == 'a' || e.getKeyChar() == 'd') {
             dir = e.getKeyChar();
         }
-        key = e.getKeyChar();
+        if (timer == 0) {
+            key = e.getKeyChar();
+        }
     }
     @Override
     public void keyReleased(KeyEvent e) {
@@ -42,5 +49,12 @@ public class KeyInput implements KeyListener{
 
     public void resetKey() {
         key = '\u0000';
+        timer = 10;
+    }
+
+    public void reduceTime() {
+        if(timer > 0) {
+            timer--;
+        }
     }
 }
