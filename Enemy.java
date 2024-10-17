@@ -27,9 +27,41 @@ public class Enemy {
         this.damage = d;
         this.x = initialX;
         this.y = initialY;
-        this.movingDirection = false;
+        this.isAlive = true;
         // enemyImage = image;
     }   
+
+
+    public void update() {
+        //shoot projectile or any other things we need to change in the game loop
+        this.updateRectangle(40, 40);
+    }
+
+    //getters and setters
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public boolean getIsAlive() {
+        return isAlive;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    protected void setX(int speed) {
+        x += speed;
+    }
+
+    protected void setY(int speed) {
+        y += speed;
+    }
 
     public int getHealth() {
         return health;
@@ -51,9 +83,6 @@ public class Enemy {
         }
     }
 
-    public Rectangle getRectangle() {
-        return rectangle;
-    }
 
     public boolean isAlive() {
         return isAlive;
@@ -82,6 +111,10 @@ public class Enemy {
         } else {
             x -= SPEED;
         }
+    }
+
+    public void updateRectangle(int width, int height) {
+        rectangle = new Rectangle(x, y, width, height);
     }
 
 }

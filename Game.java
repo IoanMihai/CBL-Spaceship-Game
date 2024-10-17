@@ -103,7 +103,7 @@ public class Game extends JPanel implements ActionListener {
             projectile.draw(g, Constants.PLAYER_DEFAULT_PROJECTILE); 
         }
         for (Enemy enemy: enemies) {
-            if (enemy.isAlive()) {
+            if (enemy.getIsAlive()) {
                 enemy.draw(g);
             }
         }
@@ -128,7 +128,7 @@ public class Game extends JPanel implements ActionListener {
         }
 
         for (Enemy enemy : enemies) {
-            enemy.move();
+            enemy.update();
         }
 
         ArrayList<Projectile> tempProjectiles = new ArrayList<>();
@@ -144,7 +144,7 @@ public class Game extends JPanel implements ActionListener {
                     if (enemy.getRectangle() != null) {
                         if (projectile.getRectangle().intersects(enemy.getRectangle())) {
                             enemy.setHealth(enemy.getHealth() - 5);
-                            if (enemy.isAlive()) {
+                            if (enemy.getIsAlive()) {
                                 tempProjectiles.remove(projectile);
                             }
                         }
@@ -165,22 +165,29 @@ public class Game extends JPanel implements ActionListener {
         }
 
         projectiles = tempProjectiles;
-        System.out.println(projectiles.size());
         gameWindow.repaint();
     }
 
     public ArrayList<Enemy> createEnemies() {
+        
         ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+        /* 
         for (int i = 0; i <= 8; i++) {
-            enemyList.add(new Enemy(10, 10, 100 * i + 100, 30));
+            enemyList.add(new MovingEnemy(10, 10, 100 * i + 100, 30));
         }
+        for (int i = 0; i <= 3; i++) {
+            enemyList.add(new Enemy(10, 10, 100 * i + 100, 130));
+        }
+            */
+
+        enemyList.add(new BossEnemy(10, 10, 100, 100));
 
         return enemyList;
     }
 
     public boolean areThereMoreEnemies(ArrayList<Enemy> enemyList) {
         for (Enemy e : enemyList) {
-            if (e.isAlive()) {
+            if (e.getIsAlive()) {
                 return true;
             }
         }
