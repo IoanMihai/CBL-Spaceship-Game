@@ -52,7 +52,7 @@ public class KeyInput implements KeyListener{
         timer = 10;
     }
 
-    public void reduceTime() {
+    public void reduceTimer() {
         if(timer > 0) {
             timer--;
         }
