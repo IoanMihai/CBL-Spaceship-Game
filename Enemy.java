@@ -17,8 +17,10 @@ public class Enemy {
     private int y;
     private File enemyImage;
     private Rectangle rectangle;
-    private boolean isAlive;
-    //private final int WIDTH = 1080;
+    private boolean isAlive = true;
+    private int SPEED = 5;
+    private final int WIDTH = 1080;
+    private boolean movingDirection;
 
     Enemy(int h, int d, int initialX, int initialY) {
         this.health = h;
@@ -29,10 +31,6 @@ public class Enemy {
         // enemyImage = image;
     }   
 
-    public void draw(Graphics g) {
-        g.setColor(Color.PINK);
-        g.fillRect(x, y, 40, 40);
-    }
 
     public void update() {
         //shoot projectile or any other things we need to change in the game loop
@@ -47,10 +45,6 @@ public class Enemy {
 
     public boolean getIsAlive() {
         return isAlive;
-    }
-
-    public void kill() {
-        isAlive = false;
     }
 
     public int getX() {
@@ -79,6 +73,44 @@ public class Enemy {
 
     public void setHealth(int newHealth) {
         this.health = newHealth;
+    }
+
+    public void draw(Graphics g) {
+        if (this.isAlive()) {
+            g.setColor(Color.PINK);
+            rectangle = new Rectangle(x, y, 40, 40);
+            g.fillRect(x, y, 40, 40);
+        }
+    }
+
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public boolean kill() {
+        if (isAlive) {
+            isAlive = false;
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
+
+    public void move() {
+        
+        if (x > WIDTH - 50) {
+            movingDirection = !movingDirection;
+        } else if (x < 0) {
+            movingDirection = !movingDirection;
+        }
+
+        if (movingDirection) {
+            x += SPEED;
+        } else {
+            x -= SPEED;
+        }
     }
 
     public void updateRectangle(int width, int height) {
