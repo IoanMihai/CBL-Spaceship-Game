@@ -9,6 +9,7 @@ public class Player {
     private final int WIDTH;
     private int score;
     private int playerHealth;
+    private Rectangle rectangle;
 
 
     public Player(int startX, int startY, int width){
@@ -36,15 +37,19 @@ public class Player {
     public void draw(Graphics g){
         g.setColor(Color.BLUE);
         g.fillRect(x, Y, 50, 50);
+        rectangle = new Rectangle(x, Y, 50, 50);
     }
 
     public int getX(){
         return x;
     }
 
-    public String getScore() {
-        String s = Integer.toString(score);
-        return s;
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public void increaseScore() {

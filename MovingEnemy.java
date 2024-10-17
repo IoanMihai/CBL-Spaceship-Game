@@ -7,7 +7,7 @@ public class MovingEnemy extends Enemy{
     private int SPEED = 5;
     private boolean movingDirection;
     private final int WIDTH = 1080;
-
+    
     public MovingEnemy(int h, int d, int initialX, int initialY) {
         super(h, d, initialX, initialY);
         this.movingDirection = false;
