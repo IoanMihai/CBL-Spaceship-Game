@@ -57,6 +57,7 @@ class Menu implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
+                frame.dispose();
                 Game game = new Game();
                 game.builIt();
             }
@@ -66,6 +67,7 @@ class Menu implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
+                System.exit(0);
             }
         });
     }

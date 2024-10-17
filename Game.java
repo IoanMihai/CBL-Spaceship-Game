@@ -7,7 +7,15 @@ import javax.swing.*;
 
 public class Game extends JPanel implements ActionListener {
     JFrame gameWindow = new JFrame("SBL Space Ship Game");
-    Player player = new Player(490, 600, 1080);
+    JPanel healthPanel;
+    JPanel scorePanel;
+    JPanel gamePanel;
+    JProgressBar healthBar;
+    JTextField playerHealthText;
+    JTextField playerScoreText;
+    JTextField scoreNumber;
+    JButton exitButton;
+    Player player = new Player(490, 500, 1080);
     ArrayList<Projectile> projectiles = new ArrayList<>();
     KeyInput keyInput = new KeyInput();
     Timer timer = new Timer(10, this);
@@ -21,13 +29,70 @@ public class Game extends JPanel implements ActionListener {
             this.setBackground(Color.BLACK);
             this.setFocusable(true);
             this.addKeyListener(keyInput);
+            this.setLayout(null);
 
+            gamePanel = new JPanel();
+            gamePanel.setLayout(new BoxLayout(gamePanel, BoxLayout.Y_AXIS));
+
+            createHealthPanel();
+            createScorePanel();
+
+            gamePanel.add(healthPanel);
+            gamePanel.add(scorePanel);
+
+            gameWindow.getContentPane().add(gamePanel, BorderLayout.SOUTH);
+            
+            buttonListeners();
             gameWindow.setSize(1080, 720);
             gameWindow.setVisible(true);
             gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+            
             timer.start();
         } );
+    }
+
+    public void createScorePanel() {
+        scorePanel = new JPanel();
+        scorePanel.setLayout(new BoxLayout(scorePanel, BoxLayout.X_AXIS));
+        scorePanel.setBackground(Color.RED);
+        playerScoreText = new JTextField(5);
+        playerScoreText.setText("Score:");
+        playerScoreText.setBackground(Color.RED);
+        playerScoreText.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        playerScoreText.setBorder(BorderFactory.createEmptyBorder());
+        scorePanel.add(playerScoreText);
+        scorePanel.add(Box.createRigidArea(new Dimension(50, 30)));
+        scoreNumber = new JTextField(5);
+        scoreNumber.setBackground(Color.RED);
+        scoreNumber.setText("0");
+        scoreNumber.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        scoreNumber.setBorder(BorderFactory.createEmptyBorder());
+        scorePanel.add(scoreNumber);
+        exitButton = new JButton("EXIT");
+        exitButton.setBackground(Color.WHITE);
+        exitButton.setBorder(BorderFactory.createEmptyBorder());
+        exitButton.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        scorePanel.add(exitButton);
+        scorePanel.add(Box.createRigidArea(new Dimension(50, 30)));
+    }
+    
+
+    public void createHealthPanel() {
+        healthPanel = new JPanel();
+        healthPanel.setLayout(new BoxLayout(healthPanel, BoxLayout.X_AXIS));
+        healthBar = new JProgressBar();
+        playerHealthText = new JTextField(8);
+        playerHealthText.setText("Health:");
+        playerHealthText.setBackground(Color.RED);
+        playerHealthText.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        playerHealthText.setBorder(BorderFactory.createEmptyBorder());
+        healthBar.setPreferredSize(new Dimension(300, 30));
+        healthBar.setValue(100);
+        healthPanel.add(playerHealthText);
+        healthPanel.add(Box.createRigidArea(new Dimension(300, 30)));
+        healthPanel.add(healthBar);
+        healthPanel.add(Box.createRigidArea(new Dimension(100, 30)));
+        healthPanel.setBackground(Color.RED);
     }
 
     @Override
@@ -35,18 +100,20 @@ public class Game extends JPanel implements ActionListener {
         super.paintComponent(g);
         player.draw(g);  
         for (Projectile projectile: projectiles) {
-            projectile.draw(g); 
+            projectile.draw(g, Constants.PLAYER_DEFAULT_PROJECTILE); 
         }
         for (Enemy enemy: enemies) {
             if (enemy.isAlive()) {
                 enemy.draw(g);
             }
         }
+        scoreNumber.setText(player.getScore());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         keyInput.reduceTime();
+        healthBar.setValue(player.getHealth());
         char keyPressed = keyInput.getKey();
         char direction = keyInput.getDir();
         if (direction == 'a') {
@@ -55,8 +122,9 @@ public class Game extends JPanel implements ActionListener {
             player.move(true);
         } 
         if (keyPressed == ' ') {
-            projectiles.add(new Projectile(player.getX()+20, 590));
+            projectiles.add(new Projectile(player.getX()+20, 490));
             keyInput.resetKey();
+            player.decreaseHealth(1);
         }
 
         for (Enemy enemy : enemies) {
@@ -82,8 +150,10 @@ public class Game extends JPanel implements ActionListener {
                         }
                     }
                     if (enemy.getHealth() <= 0) {
-                        enemy.kill();
-                        player.increaseScore();
+                        boolean flag = enemy.kill();
+                        if (flag) {
+                            player.increaseScore();
+                        }
                     }
                 }
             }
@@ -115,5 +185,18 @@ public class Game extends JPanel implements ActionListener {
             }
         }
         return false;
+    }
+
+    void buttonListeners() {
+        exitButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gameWindow.setVisible(false);
+                gameWindow.dispose();
+                Menu menu = new Menu();
+                menu.buildMenu();
+            }
+        });
     }
 }

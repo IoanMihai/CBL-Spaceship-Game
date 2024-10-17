@@ -8,6 +8,7 @@ public class Player {
     private int x;
     private final int WIDTH;
     private int score;
+    private int playerHealth;
 
 
     public Player(int startX, int startY, int width){
@@ -15,6 +16,7 @@ public class Player {
         this.Y = startY;
         this.WIDTH = width;
         this.score = 0;
+        this.playerHealth = 100;
     }
 
     public void move(boolean dir){
@@ -40,12 +42,20 @@ public class Player {
         return x;
     }
 
-    public int getScore() {
-        return score;
+    public String getScore() {
+        String s = Integer.toString(score);
+        return s;
     }
 
     public void increaseScore() {
         score++;
     }
 
+    public int getHealth() {
+        return playerHealth;
+    }
+
+    public void decreaseHealth(int damage) {
+        playerHealth -= damage;
+    }
 }

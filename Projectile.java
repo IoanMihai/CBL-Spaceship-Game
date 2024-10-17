@@ -17,11 +17,22 @@ public class Projectile {
         y -= SPEED;
     }
 
-    public void draw(Graphics g){
-        g.setColor(Color.RED);
-        rectangle = new Rectangle(X, y, 10, 30);
-        g.fillRect(X, y, 10, 30);
-    }
+    public void draw(Graphics g, int type) {
+        switch (type) {
+            case Constants.PLAYER_DEFAULT_PROJECTILE:
+                g.setColor(Color.RED);
+                rectangle = new Rectangle(X, y, 10, 30);
+                g.fillRect(X, y, 10, 30);
+                break;
+            case Constants.ENEMY_DEFAULT_PROJECTILE:
+                g.setColor(Color.GREEN);
+                rectangle = new Rectangle(X, y, 5, 15);
+                g.fillRect(X, y, 5, 15);
+                break;
+            default:
+                break;
+        }
+    } 
 
     public Rectangle getRectangle() {
         return rectangle;
