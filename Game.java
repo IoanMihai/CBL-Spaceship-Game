@@ -112,7 +112,7 @@ public class Game extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        keyInput.reduceTime();
+        keyInput.reduceTimer();
         healthBar.setValue(player.getHealth());
         char keyPressed = keyInput.getKey();
         char direction = keyInput.getDir();
