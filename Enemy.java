@@ -59,8 +59,14 @@ public class Enemy {
         return isAlive;
     }
 
-    public void kill() {
-        isAlive = false;
+    public boolean kill() {
+        if (isAlive) {
+            isAlive = false;
+            return true;
+        } else {
+            return false;
+        }
+        
     }
 
     public void move() {
