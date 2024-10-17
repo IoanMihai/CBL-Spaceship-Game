@@ -17,19 +17,57 @@ public class Enemy {
     private int y;
     private File enemyImage;
     private Rectangle rectangle;
-    private boolean isAlive = true;
-    private int SPEED = 5;
-    private final int WIDTH = 1080;
-    private boolean movingDirection;
+    private boolean isAlive;
+    //private final int WIDTH = 1080;
 
     Enemy(int h, int d, int initialX, int initialY) {
         this.health = h;
         this.damage = d;
         this.x = initialX;
         this.y = initialY;
-        this.movingDirection = false;
+        this.isAlive = true;
         // enemyImage = image;
     }   
+
+    public void draw(Graphics g) {
+        g.setColor(Color.PINK);
+        g.fillRect(x, y, 40, 40);
+    }
+
+    public void update() {
+        //shoot projectile or any other things we need to change in the game loop
+        this.updateRectangle(40, 40);
+    }
+
+    //getters and setters
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public boolean getIsAlive() {
+        return isAlive;
+    }
+
+    public void kill() {
+        isAlive = false;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    protected void setX(int speed) {
+        x += speed;
+    }
+
+    protected void setY(int speed) {
+        y += speed;
+    }
 
     public int getHealth() {
         return health;
@@ -43,39 +81,8 @@ public class Enemy {
         this.health = newHealth;
     }
 
-    public void draw(Graphics g) {
-        if (this.isAlive()) {
-            g.setColor(Color.PINK);
-            rectangle = new Rectangle(x, y, 40, 40);
-            g.fillRect(x, y, 40, 40);
-        }
-    }
-
-    public Rectangle getRectangle() {
-        return rectangle;
-    }
-
-    public boolean isAlive() {
-        return isAlive;
-    }
-
-    public void kill() {
-        isAlive = false;
-    }
-
-    public void move() {
-        
-        if (x > WIDTH - 50) {
-            movingDirection = !movingDirection;
-        } else if (x < 0) {
-            movingDirection = !movingDirection;
-        }
-
-        if (movingDirection) {
-            x += SPEED;
-        } else {
-            x -= SPEED;
-        }
+    public void updateRectangle(int width, int height) {
+        rectangle = new Rectangle(x, y, width, height);
     }
 
 }
