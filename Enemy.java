@@ -28,7 +28,7 @@ public class Enemy {
         this.x = initialX;
         this.y = initialY;
         this.isAlive = true;
-        Toolkit t=Toolkit.getDefaultToolkit();
+        Toolkit t = Toolkit.getDefaultToolkit();
         enemyImage = t.getImage(image);
     }   
 
