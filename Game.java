@@ -19,6 +19,7 @@ public class Game extends JPanel implements ActionListener {
     Player player = new Player(490, 500, 1080);
     ArrayList<Projectile> projectiles = new ArrayList<>();
     ArrayList<Projectile> enemyProjectiles = new ArrayList<>();
+    ArrayList<Upgrades> upgrades = new ArrayList<>();
     KeyInput keyInput = new KeyInput();
     Timer timer = new Timer(10, this);
     ArrayList<Enemy> enemies = new ArrayList<>();
@@ -104,13 +105,17 @@ public class Game extends JPanel implements ActionListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        player.draw(g);  
+        player.draw(g);
         for (Projectile projectile: projectiles) {
             projectile.draw(g, Constants.PLAYER_DEFAULT_PROJECTILE); 
         }
 
         for (Projectile enemProjectile : enemyProjectiles) {
             enemProjectile.draw(g, Constants.ENEMY_DEFAULT_PROJECTILE);
+        }
+
+        for (Upgrades upgrade : upgrades) {
+            upgrade.draw(g);
         }
 
         for (Enemy enemy: enemies) {
@@ -145,6 +150,10 @@ public class Game extends JPanel implements ActionListener {
             keyInput.resetKey();
         }
 
+        for (Upgrades upgrade : upgrades) {
+            upgrade.update();
+        }
+ 
         for (Enemy enemy : enemies) {
             enemy.update();
             if (enemy.isAlive() && (enemy.getX() < player.getX() + 10 && enemy.getX() > player.getX() - 10)) {
@@ -175,6 +184,10 @@ public class Game extends JPanel implements ActionListener {
                         boolean flag = enemy.kill();
                         if (flag) {
                             player.increaseScore();
+                            Random randomUpgrades = new Random();
+                            if (randomUpgrades.nextInt(1000) % 5 == 0) {
+                                upgrades.add(new Upgrades(10, enemy.getX(), enemy.getY()));
+                            }
                         }
                     }
                 }
@@ -197,10 +210,19 @@ public class Game extends JPanel implements ActionListener {
         }
 
         if (!areThereMoreEnemies(enemies)) {
-            waveNumber ++;
+            waveNumber++;
             enemies.clear();
             enemies = createEnemies();
         }
+
+        for (Upgrades upgrade : upgrades) {
+            if (upgrade != null) {
+                if (upgrade.getY() < 0) {
+                    upgrades.remove(upgrade);
+                }
+            }
+        }
+ 
         enemyProjectiles = tempEnemyProjectiles;
         projectiles = tempProjectiles;
         gameWindow.repaint();
