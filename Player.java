@@ -9,6 +9,7 @@ public class Player {
     private final int WIDTH;
     private int score;
     private int playerHealth;
+    private int waveCounter;
 
 
     public Player(int startX, int startY, int width){
@@ -16,6 +17,7 @@ public class Player {
         this.Y = startY;
         this.WIDTH = width;
         this.score = 0;
+        this.waveCounter = 0;
         this.playerHealth = 100;
     }
 
@@ -42,6 +44,10 @@ public class Player {
         return x;
     }
 
+    public int getWave() {
+        return waveCounter;
+    }
+
     public String getScore() {
         String s = Integer.toString(score);
         return s;
@@ -57,5 +63,9 @@ public class Player {
 
     public void decreaseHealth(int damage) {
         playerHealth -= damage;
+    }
+
+    public void increaseWaveCounter() {
+        waveCounter++;
     }
 }

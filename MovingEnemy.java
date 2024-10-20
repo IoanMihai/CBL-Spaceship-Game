@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MovingEnemy extends Enemy{
     private int SPEED = 5;
@@ -10,7 +11,7 @@ public class MovingEnemy extends Enemy{
 
     public MovingEnemy(int h, int d, int initialX, int initialY) {
         super(h, d, initialX, initialY);
-        this.movingDirection = false;
+        this.movingDirection = new Random().nextBoolean();
 
     }
 

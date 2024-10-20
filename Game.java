@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Iterator;
 
 import javax.swing.*;
@@ -171,16 +172,47 @@ public class Game extends JPanel implements ActionListener {
     public ArrayList<Enemy> createEnemies() {
         
         ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-        /* 
-        for (int i = 0; i <= 8; i++) {
-            enemyList.add(new MovingEnemy(10, 10, 100 * i + 100, 30));
-        }
-        for (int i = 0; i <= 3; i++) {
-            enemyList.add(new Enemy(10, 10, 100 * i + 100, 130));
-        }
-            */
+        if(player.getWave()%5 == 0 && player.getWave() != 0) {
+            enemyList.add(new BossEnemy(player.getWave() * 3, 10, 100, 100));
+        } else {
+            Random random = new Random();
+            ArrayList<int[]> posistions = new ArrayList<>();
+            for (int i = 0; i <= player.getWave()-random.nextInt(10) - 3 && i < 9; i++) {
+                int[] pos = new int[] {random.nextInt(10), 30};
 
-        enemyList.add(new BossEnemy(10, 10, 100, 100));
+                while(contains(posistions, pos)) {
+                    pos[0] ++;
+                    if(pos[0] >= 10) {
+                        pos[0] = 0;
+                    }
+                } 
+
+                posistions.add(pos);
+
+                enemyList.add(new MovingEnemy(player.getWave() + 1, 10, pos[0] * 100 + 100, pos[1]));
+            }
+            for (int i = 0; i <= player.getWave()/2 -random.nextInt(5) + 5 && i < 18; i++) {
+                int[] pos = new int[] {random.nextInt(10), random.nextInt(2)};
+
+                while(contains(posistions, pos)) {
+                    pos[0] ++;
+                    if(pos[0] >= 10 && pos[1] == 1) {
+                        pos[0] = 0;
+                        pos[1] = 0;
+                    } else if (pos[0] >= 10) {
+                        pos[0] = 0;
+                        pos[1] = 1;
+                    }
+                } 
+                
+                posistions.add(pos);
+                
+                enemyList.add(new Enemy(player.getWave() + 1, 10, pos[0] * 100 + 100, pos[1] * 100 + 130));
+            }
+        }
+            
+
+        //enemyList.add(new BossEnemy(10, 10, 100, 100));
 
         return enemyList;
     }
@@ -191,6 +223,7 @@ public class Game extends JPanel implements ActionListener {
                 return true;
             }
         }
+        player.increaseWaveCounter();
         return false;
     }
 
@@ -205,5 +238,14 @@ public class Game extends JPanel implements ActionListener {
                 menu.buildMenu();
             }
         });
+    }
+
+    public boolean contains(ArrayList<int[]> arrayList, int[] array) {
+        for(int[] arr : arrayList) {
+            if(arr[0] == array[0] && arr[1] == array[1]) {
+                return true;
+            }
+        }
+        return false;
     }
 }
