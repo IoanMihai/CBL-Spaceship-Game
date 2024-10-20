@@ -11,8 +11,8 @@ public class BossEnemy extends Enemy{
     private final int HEIGHT = 300;
     
 
-    public BossEnemy(int h, int d, int initialX, int initialY) {
-        super(h, d, initialX, initialY);
+    public BossEnemy(String image, int h, int d, int initialX, int initialY) {
+        super(image, h, d, initialX, initialY);
         movingDirectionX = true;
         movingDirectionY = false;
     }
@@ -42,11 +42,4 @@ public class BossEnemy extends Enemy{
 
         super.updateRectangle(80, 80);
     }
-
-    @Override
-    public void draw(Graphics g) {
-        g.setColor(Color.ORANGE);
-        g.fillRect(super.getX(), super.getY(), 80, 80);
-    }
-
 }

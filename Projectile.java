@@ -15,23 +15,22 @@ public class Projectile {
 
     public void update() {
         y -= SPEED;
+        rectangle = new Rectangle(X, y, 10, 30);
     }
 
     public void updateEnemyProjectile() {
         y += SPEED;
+        rectangle = new Rectangle(X, y, 5, 15);
     }
 
     public void draw(Graphics g, int type) {
+        Toolkit t = Toolkit.getDefaultToolkit();
         switch (type) {
             case Constants.PLAYER_DEFAULT_PROJECTILE:
-                g.setColor(Color.RED);
-                rectangle = new Rectangle(X, y, 10, 30);
-                g.fillRect(X, y, 10, 30);
+                g.drawImage(t.getImage("Assets/PlayerProjectile.png"), X, y, null);
                 break;
             case Constants.ENEMY_DEFAULT_PROJECTILE:
-                g.setColor(Color.GREEN);
-                rectangle = new Rectangle(X, y, 5, 15);
-                g.fillRect(X, y, 5, 15);
+                g.drawImage(t.getImage("Assets/EnemyProjectile.png"), X, y, null);
                 break;
             default:
                 break;

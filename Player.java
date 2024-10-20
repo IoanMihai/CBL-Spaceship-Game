@@ -11,6 +11,7 @@ public class Player {
     private int playerHealth;
     private int waveCounter;
     private Rectangle rectangle;
+    private Image playerImage;
 
 
     public Player(int startX, int startY, int width){
@@ -20,6 +21,8 @@ public class Player {
         this.score = 0;
         this.waveCounter = 0;
         this.playerHealth = 100;
+        Toolkit t = Toolkit.getDefaultToolkit();
+        playerImage = t.getImage("Assets/Player.png");
     }
 
     public void move(boolean dir){
@@ -34,12 +37,11 @@ public class Player {
         } else if(x < 0){
             x = 0;
         }
+        rectangle = new Rectangle(x, Y, 50, 50);
     }
 
     public void draw(Graphics g){
-        g.setColor(Color.BLUE);
-        g.fillRect(x, Y, 50, 50);
-        rectangle = new Rectangle(x, Y, 50, 50);
+        g.drawImage(playerImage, x, Y, null);
     }
 
     public int getX(){
