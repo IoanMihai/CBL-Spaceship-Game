@@ -9,8 +9,8 @@ public class MovingEnemy extends Enemy{
     private boolean movingDirection;
     private final int WIDTH = 1080;
     
-    public MovingEnemy(int h, int d, int initialX, int initialY) {
-        super(h, d, initialX, initialY);
+    public MovingEnemy(String image, int h, int d, int initialX, int initialY) {
+        super(image, h, d, initialX, initialY);
         this.movingDirection = new Random().nextBoolean();
 
     }
@@ -30,12 +30,6 @@ public class MovingEnemy extends Enemy{
         }
 
         super.updateRectangle(40 ,40);
-    }
-
-    @Override
-    public void draw(Graphics g) {
-        g.setColor(Color.GREEN);
-        g.fillRect(super.getX(), super.getY(), 40, 40);
     }
 
 }
