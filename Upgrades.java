@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,22 +15,23 @@ public class Upgrades {
     private int x;
     private int y;
     private BufferedImage healingPotion;
-    private int heal;
+    private final int HEAL = 10;
+    private Rectangle rectangle;
     
-    Upgrades(int healNumber, int initialX, int initialY) {
+    Upgrades(int initialX, int initialY) {
         try {
             healingPotion = ImageIO.read(new File("Assets/hp_potion.png"));
         } catch (IOException ex) {
-            System.out.println("Ghinion frate");
+            System.out.println("No image found for healing asset. ");
         }
-
-        this.heal = healNumber;
         this.x = initialX;
-        this.y = initialY;
+        this.y = initialY; 
+        this.rectangle = new Rectangle(x, y, WIDTH, HEIGHT);
     }
 
     public void update() {
         y += 3;
+        rectangle = new Rectangle(x, y, WIDTH, HEIGHT);
     }
 
     public int getY() {
@@ -38,6 +40,14 @@ public class Upgrades {
 
     public void draw(Graphics g) {
         g.drawImage(healingPotion, x, y, null);
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public int getHealIncrease() {
+        return HEAL;
     }
 
 }

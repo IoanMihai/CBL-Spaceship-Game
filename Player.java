@@ -73,4 +73,11 @@ public class Player {
     public void increaseWaveCounter() {
         waveCounter++;
     }
+
+    public void increaseHealth(int healthIncrease) {
+        playerHealth = playerHealth + healthIncrease;
+        if (playerHealth > 100) {
+            playerHealth = 100;
+        }
+    }
 }

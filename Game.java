@@ -186,7 +186,7 @@ public class Game extends JPanel implements ActionListener {
                             player.increaseScore();
                             Random randomUpgrades = new Random();
                             if (randomUpgrades.nextInt(1000) % 5 == 0) {
-                                upgrades.add(new Upgrades(10, enemy.getX(), enemy.getY()));
+                                upgrades.add(new Upgrades(enemy.getX(), enemy.getY()));
                             }
                         }
                     }
@@ -214,15 +214,18 @@ public class Game extends JPanel implements ActionListener {
             enemies.clear();
             enemies = createEnemies();
         }
-
+        ArrayList<Upgrades> tempUpgrades = new ArrayList<>();
         for (Upgrades upgrade : upgrades) {
             if (upgrade != null) {
-                if (upgrade.getY() < 0) {
-                    upgrades.remove(upgrade);
+
+                if (upgrade.getRectangle().intersects(player.getRectangle())) {
+                    player.increaseHealth(upgrade.getHealIncrease());
+                } else if (upgrade.getY() >= 0) {
+                    tempUpgrades.add(upgrade);
                 }
             }
         }
- 
+        upgrades = tempUpgrades;
         enemyProjectiles = tempEnemyProjectiles;
         projectiles = tempProjectiles;
         gameWindow.repaint();
