@@ -210,7 +210,7 @@ public class Game extends JPanel implements ActionListener {
         
         ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
         if(player.getWave()%5 == 0 && player.getWave() != 0) {
-            enemyList.add(new BossEnemy(player.getWave() * 3, 10, 100, 100));
+            enemyList.add(new BossEnemy(player.getWave() * 3, player.getWave(), 100, 100));
         } else {
             Random random = new Random();
             ArrayList<int[]> posistions = new ArrayList<>();
@@ -226,7 +226,7 @@ public class Game extends JPanel implements ActionListener {
 
                 posistions.add(pos);
 
-                enemyList.add(new MovingEnemy(player.getWave() + 1, 10, pos[0] * 100 + 100, pos[1]));
+                enemyList.add(new MovingEnemy(player.getWave() + 1, player.getWave(), pos[0] * 100 + 100, pos[1]));
             }
             for (int i = 0; i <= player.getWave()/2 -random.nextInt(5) + 5 && i < 18; i++) {
                 int[] pos = new int[] {random.nextInt(10), random.nextInt(2)};
@@ -244,7 +244,7 @@ public class Game extends JPanel implements ActionListener {
                 
                 posistions.add(pos);
                 
-                enemyList.add(new Enemy(player.getWave() + 1, 10, pos[0] * 100 + 100, pos[1] * 100 + 130));
+                enemyList.add(new Enemy(player.getWave() + 1, player.getWave(), pos[0] * 100 + 100, pos[1] * 100 + 130));
             }
         }
             
