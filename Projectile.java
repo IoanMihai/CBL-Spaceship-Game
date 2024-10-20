@@ -17,6 +17,10 @@ public class Projectile {
         y -= SPEED;
     }
 
+    public void updateEnemyProjectile() {
+        y += SPEED;
+    }
+
     public void draw(Graphics g, int type) {
         switch (type) {
             case Constants.PLAYER_DEFAULT_PROJECTILE:

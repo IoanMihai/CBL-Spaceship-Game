@@ -18,9 +18,11 @@ public class Game extends JPanel implements ActionListener {
     JButton exitButton;
     Player player = new Player(490, 500, 1080);
     ArrayList<Projectile> projectiles = new ArrayList<>();
+    ArrayList<Projectile> enemyProjectiles = new ArrayList<>();
     KeyInput keyInput = new KeyInput();
     Timer timer = new Timer(10, this);
     ArrayList<Enemy> enemies = new ArrayList<>();
+    private int waveNumber = 1;
 
     public void builIt() {
         SwingUtilities.invokeLater( () -> {
@@ -61,6 +63,7 @@ public class Game extends JPanel implements ActionListener {
         playerScoreText.setBackground(Color.RED);
         playerScoreText.setFont(new Font("Times New Roman", Font.BOLD, 20));
         playerScoreText.setBorder(BorderFactory.createEmptyBorder());
+        playerScoreText.setEditable(false);
         scorePanel.add(playerScoreText);
         scorePanel.add(Box.createRigidArea(new Dimension(50, 30)));
         scoreNumber = new JTextField(5);
@@ -68,6 +71,7 @@ public class Game extends JPanel implements ActionListener {
         scoreNumber.setText("0");
         scoreNumber.setFont(new Font("Times New Roman", Font.BOLD, 20));
         scoreNumber.setBorder(BorderFactory.createEmptyBorder());
+        scoreNumber.setEditable(false);
         scorePanel.add(scoreNumber);
         exitButton = new JButton("EXIT");
         exitButton.setBackground(Color.WHITE);
@@ -87,6 +91,7 @@ public class Game extends JPanel implements ActionListener {
         playerHealthText.setBackground(Color.RED);
         playerHealthText.setFont(new Font("Times New Roman", Font.BOLD, 20));
         playerHealthText.setBorder(BorderFactory.createEmptyBorder());
+        playerHealthText.setEditable(false);
         healthBar.setPreferredSize(new Dimension(300, 30));
         healthBar.setValue(100);
         healthPanel.add(playerHealthText);
@@ -103,18 +108,31 @@ public class Game extends JPanel implements ActionListener {
         for (Projectile projectile: projectiles) {
             projectile.draw(g, Constants.PLAYER_DEFAULT_PROJECTILE); 
         }
+
+        for (Projectile enemProjectile : enemyProjectiles) {
+            enemProjectile.draw(g, Constants.ENEMY_DEFAULT_PROJECTILE);
+        }
+
         for (Enemy enemy: enemies) {
             if (enemy.getIsAlive()) {
                 enemy.draw(g);
             }
         }
-        scoreNumber.setText(player.getScore());
+        scoreNumber.setText(Integer.toString(player.getScore()));
+
+        if (player.getHealth() <= 0) {
+            ScoreMenu scoreMenu = new ScoreMenu(player.getScore());
+            gameWindow.setVisible(false);
+            gameWindow.dispose();
+            scoreMenu.buildIt();
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         keyInput.reduceTimer();
         healthBar.setValue(player.getHealth());
+
         char keyPressed = keyInput.getKey();
         char direction = keyInput.getDir();
         if (direction == 'a') {
@@ -125,12 +143,15 @@ public class Game extends JPanel implements ActionListener {
         if (keyPressed == ' ') {
             projectiles.add(new Projectile(player.getX()+20, 490));
             keyInput.resetKey();
-            player.decreaseHealth(1);
         }
 
         for (Enemy enemy : enemies) {
             enemy.update();
+            if (enemy.isAlive() && (enemy.getX() < player.getX() + 10 && enemy.getX() > player.getX() - 10)) {
+                enemyProjectiles.add(new Projectile(enemy.getX() + 17, enemy.getY() + 30));
+            }
         }
+
 
         ArrayList<Projectile> tempProjectiles = new ArrayList<>();
         for (Projectile projectile: projectiles) {
@@ -160,11 +181,27 @@ public class Game extends JPanel implements ActionListener {
             }
         }
 
+        ArrayList<Projectile> tempEnemyProjectiles = new ArrayList<>();
+        for (Projectile enemProjectile : enemyProjectiles) {
+            enemProjectile.updateEnemyProjectile();
+            if (enemProjectile.getY() >= 0) {
+                tempEnemyProjectiles.add(enemProjectile);
+            }
+
+            if (enemProjectile.getRectangle() != null) {
+                if (enemProjectile.getRectangle().intersects(player.getRectangle())) {
+                    player.decreaseHealth(1);
+                    tempEnemyProjectiles.remove(enemProjectile);
+                }
+            }  
+        }
+
         if (!areThereMoreEnemies(enemies)) {
+            waveNumber ++;
             enemies.clear();
             enemies = createEnemies();
         }
-
+        enemyProjectiles = tempEnemyProjectiles;
         projectiles = tempProjectiles;
         gameWindow.repaint();
     }
@@ -213,7 +250,6 @@ public class Game extends JPanel implements ActionListener {
             
 
         //enemyList.add(new BossEnemy(10, 10, 100, 100));
-
         return enemyList;
     }
 

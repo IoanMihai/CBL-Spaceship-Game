@@ -10,6 +10,7 @@ public class Player {
     private int score;
     private int playerHealth;
     private int waveCounter;
+    private Rectangle rectangle;
 
 
     public Player(int startX, int startY, int width){
@@ -38,19 +39,21 @@ public class Player {
     public void draw(Graphics g){
         g.setColor(Color.BLUE);
         g.fillRect(x, Y, 50, 50);
+        rectangle = new Rectangle(x, Y, 50, 50);
     }
 
     public int getX(){
         return x;
     }
-
     public int getWave() {
         return waveCounter;
     }
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
 
-    public String getScore() {
-        String s = Integer.toString(score);
-        return s;
+    public int getScore() {
+        return score;
     }
 
     public void increaseScore() {
