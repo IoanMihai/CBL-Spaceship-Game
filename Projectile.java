@@ -7,10 +7,12 @@ public class Projectile {
     private final int X;
     private int y;
     private Rectangle rectangle;
+    private int damage;
 
-    public Projectile(int x, int y) {
+    public Projectile(int x, int y, int d) {
         this.X = x;
         this.y = y;
+        this.damage = d;
     }
 
     public void update() {
@@ -45,4 +47,7 @@ public class Projectile {
         return y;
     }
 
+    public int getDamage() {
+        return damage;
+    }
 }

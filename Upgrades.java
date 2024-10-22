@@ -10,20 +10,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Upgrades {
-    private int WIDTH = 40;
-    private int HEIGHT = 40;
+    private int width = 40;
+    private int height = 40;
     private int x;
     private int y;
     private BufferedImage upgraBufferedImage;
     private Image upgradeImage;
-    private final int HEAL = 10;
+    private final int heal = 10;
     private Rectangle rectangle;
     private int type;
     
     Upgrades(int initialX, int initialY, int givenType) {
         this.x = initialX;
         this.y = initialY; 
-        this.rectangle = new Rectangle(x, y, WIDTH, HEIGHT);
+        this.rectangle = new Rectangle(x, y, width, height);
         this.type = givenType;
         readImage();
     }
@@ -36,7 +36,7 @@ public class Upgrades {
                 } catch (IOException ex) {
                     System.out.println("No image found for healing asset. ");
                 }
-                upgradeImage = upgraBufferedImage.getScaledInstance(WIDTH, HEIGHT, 
+                upgradeImage = upgraBufferedImage.getScaledInstance(width, height, 
                     Image.SCALE_DEFAULT);
                 break;
             case Constants.DAMAGE_UPGRADE:
@@ -45,7 +45,7 @@ public class Upgrades {
                 } catch (IOException ex) {
                     System.out.println("No image found for healing asset. ");
                 }
-                upgradeImage = upgraBufferedImage.getScaledInstance(WIDTH, HEIGHT, 
+                upgradeImage = upgraBufferedImage.getScaledInstance(width, height, 
                     Image.SCALE_DEFAULT);
                 break;
             default:
@@ -56,7 +56,7 @@ public class Upgrades {
 
     public void update() {
         y += 3;
-        rectangle = new Rectangle(x, y, WIDTH, HEIGHT);
+        rectangle = new Rectangle(x, y, width, height);
     }
 
     public int getY() {
@@ -72,7 +72,7 @@ public class Upgrades {
     }
 
     public int getHealIncrease() {
-        return HEAL;
+        return heal;
     }
 
     public int getUpgradeType() {

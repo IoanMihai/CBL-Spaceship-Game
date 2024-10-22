@@ -1,14 +1,4 @@
 import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
-import java.util.ArrayList;
-
-import javax.swing.*;
-
-interface EnemyInterface 
-{
-    void spawn();
-}
 
 public class Enemy {
     private int health;
