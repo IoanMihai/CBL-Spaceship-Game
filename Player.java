@@ -16,6 +16,7 @@ public class Player {
     private int waveCounter;
     private Rectangle rectangle;
     private Image playerImage;
+    private int damage;
 
     /**
      * Constructor for the Player class
@@ -23,7 +24,8 @@ public class Player {
      * @param startY The y posistion of the player
      * @param width The width of the screen
      */
-    public Player(int startX, int startY, int width){
+
+    public Player(int startX, int startY, int width, int initialDamage){
         this.x = startX;
         this.Y = startY;
         this.WIDTH = width;
@@ -32,6 +34,8 @@ public class Player {
         this.playerHealth = 100;
         Toolkit t = Toolkit.getDefaultToolkit();
         playerImage = t.getImage("Assets/Player.png");
+        this.rectangle = new Rectangle(startX, startY, WIDTH, WIDTH);
+        this.damage = initialDamage;
     }
 
     /**
@@ -40,7 +44,7 @@ public class Player {
      */
 
     public void move(boolean dir){
-        if(dir){
+        if (dir){
             x += SPEED;
         } else {
             x -= SPEED;
@@ -67,9 +71,11 @@ public class Player {
     public int getX(){
         return x;
     }
+
     public int getWave() {
         return waveCounter;
     }
+
     public Rectangle getRectangle() {
         return rectangle;
     }
@@ -92,5 +98,20 @@ public class Player {
 
     public void increaseWaveCounter() {
         waveCounter++;
+    }
+
+    public void increaseHealth(int healthIncrease) {
+        playerHealth = playerHealth + healthIncrease;
+        if (playerHealth > 100) {
+            playerHealth = 100;
+        }
+    }
+
+    public void setDamage(int newDamage) { 
+        damage = newDamage;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 }
