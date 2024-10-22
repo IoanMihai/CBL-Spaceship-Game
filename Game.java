@@ -186,7 +186,7 @@ public class Game extends JPanel implements ActionListener {
                             if (randomUpgrades.nextInt(1000) % 5 == 0) {
                                 upgrades.add(new Upgrades(enemy.getX(), enemy.getY(), 
                                     Constants.HEALING_UPGRADE));
-                            } else if (randomUpgrades.nextInt(1000) % 10 == 0) {
+                            } else if (randomUpgrades.nextInt(1000) % 17 == 0) {
                                 upgrades.add(new Upgrades(enemy.getX(), enemy.getY(), 
                                     Constants.DAMAGE_UPGRADE));
                             }
@@ -249,7 +249,7 @@ public class Game extends JPanel implements ActionListener {
         ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
         if (player.getWave() % 5 == 0 && player.getWave() != 0) {
             enemyList.add(new BossEnemy("Assets/Boss.png", 
-                player.getWave() * 3, player.getWave(), 100, 100));
+                player.getWave() * 10, player.getWave() * 3, 100, 100));
         } else {
             Random random = new Random();
             ArrayList<int[]> posistions = new ArrayList<>();
@@ -266,7 +266,7 @@ public class Game extends JPanel implements ActionListener {
                 posistions.add(pos);
 
                 enemyList.add(new MovingEnemy("Assets/MovingEnemy.png", 
-                    player.getWave() + 1, player.getWave(), pos[0] * 100 + 100, pos[1]));
+                    player.getWave() * 3 + 1, player.getWave(), pos[0] * 100 + 100, pos[1]));
             }
             for (int i = 0; i <= player.getWave() / 2 - random.nextInt(5) + 5 && i < 18;  i++) {
                 int[] pos = new int[] {random.nextInt(10), random.nextInt(2)};
@@ -284,8 +284,8 @@ public class Game extends JPanel implements ActionListener {
                 
                 posistions.add(pos);
                 
-                enemyList.add(new Enemy("Assets/BasicEnemy.png", player.getWave() + 1, 
-                    player.getWave(), pos[0] * 100 + 100, pos[1] * 100 + 130));
+                enemyList.add(new Enemy("Assets/BasicEnemy.png", player.getWave() * 3 + 1, 
+                    player.getWave() , pos[0] * 100 + 100, pos[1] * 100 + 130));
             }
         }
             
