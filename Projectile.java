@@ -11,6 +11,7 @@ public class Projectile {
     private final int X;
     private int y;
     private Rectangle rectangle;
+    private int damage;
 
     /**
      * The constructor for the Projectile class
@@ -18,8 +19,10 @@ public class Projectile {
      * @param y The initial y posistion of the projectile
      */
     public Projectile(int x, int y) {
+
         this.X = x;
         this.y = y;
+        this.damage = d;
     }
 
     /**
@@ -67,4 +70,7 @@ public class Projectile {
         return y;
     }
 
+    public int getDamage() {
+        return damage;
+    }
 }

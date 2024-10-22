@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 
 public class BossEnemy extends Enemy{
+
     private int SPEED = 7;
     private boolean movingDirectionX;
     private boolean movingDirectionY;
