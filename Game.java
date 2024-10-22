@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.*;
 
+/**
+ * 
+ */
+
 public class Game extends JPanel implements ActionListener {
     JFrame gameWindow = new JFrame("SBL Space Ship Game");
     JPanel healthPanel;
@@ -23,6 +27,9 @@ public class Game extends JPanel implements ActionListener {
     ArrayList<Enemy> enemies = new ArrayList<>();
     // private int waveNumber = 1;
 
+    /**
+     * Creates the game window and panel, also initializes all the actial listeners
+     */
     public void builIt() {
         SwingUtilities.invokeLater(() -> {
             gameWindow.add(this);
@@ -52,42 +59,49 @@ public class Game extends JPanel implements ActionListener {
         });
     }
 
+    /**
+     * 
+     */
     public void createScorePanel() {
         scorePanel = new JPanel();
         scorePanel.setLayout(new BoxLayout(scorePanel, BoxLayout.X_AXIS));
-        scorePanel.setBackground(Color.RED);
+        scorePanel.setBackground(Color.decode("#117E8E"));
         playerScoreText = new JTextField(5);
         playerScoreText.setText("Score:");
-        playerScoreText.setBackground(Color.RED);
-        playerScoreText.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        playerScoreText.setBackground(Color.decode("#117E8E"));
+        playerScoreText.setFont(new Font("Dialog", Font.BOLD, 20));
         playerScoreText.setBorder(BorderFactory.createEmptyBorder());
         playerScoreText.setEditable(false);
         scorePanel.add(playerScoreText);
         scorePanel.add(Box.createRigidArea(new Dimension(50, 30)));
         scoreNumber = new JTextField(5);
-        scoreNumber.setBackground(Color.RED);
+        scoreNumber.setBackground(Color.decode("#117E8E"));
         scoreNumber.setText("0");
-        scoreNumber.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        scoreNumber.setFont(new Font("Dialog", Font.BOLD, 20));
         scoreNumber.setBorder(BorderFactory.createEmptyBorder());
         scoreNumber.setEditable(false);
         scorePanel.add(scoreNumber);
-        exitButton = new JButton("EXIT");
+        exitButton = new JButton();
         exitButton.setBackground(Color.WHITE);
+        Toolkit t = Toolkit.getDefaultToolkit();
+        exitButton.setIcon(new ImageIcon(t.getImage("Assets/exit3.png")));
         exitButton.setBorder(BorderFactory.createEmptyBorder());
-        exitButton.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        exitButton.setFont(new Font("Dialog", Font.BOLD, 20));
         scorePanel.add(exitButton);
         scorePanel.add(Box.createRigidArea(new Dimension(50, 30)));
     }
     
-
+    /**
+     * 
+     */
     public void createHealthPanel() {
         healthPanel = new JPanel();
         healthPanel.setLayout(new BoxLayout(healthPanel, BoxLayout.X_AXIS));
         healthBar = new JProgressBar();
         playerHealthText = new JTextField(8);
         playerHealthText.setText("Health:");
-        playerHealthText.setBackground(Color.RED);
-        playerHealthText.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        playerHealthText.setBackground(Color.decode("#117E8E"));
+        playerHealthText.setFont(new Font("Dialog", Font.BOLD, 20));
         playerHealthText.setBorder(BorderFactory.createEmptyBorder());
         playerHealthText.setEditable(false);
         healthBar.setPreferredSize(new Dimension(300, 30));
@@ -96,9 +110,12 @@ public class Game extends JPanel implements ActionListener {
         healthPanel.add(Box.createRigidArea(new Dimension(300, 30)));
         healthPanel.add(healthBar);
         healthPanel.add(Box.createRigidArea(new Dimension(100, 30)));
-        healthPanel.setBackground(Color.RED);
+        healthPanel.setBackground(Color.decode("#117E8E"));
     }
 
+    /**
+     * 
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -130,6 +147,9 @@ public class Game extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * 
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         keyInput.reduceTimer();
@@ -244,8 +264,11 @@ public class Game extends JPanel implements ActionListener {
         gameWindow.repaint();
     }
 
+    /**
+     * 
+     * @return
+     */
     public ArrayList<Enemy> createEnemies() {
-        
         ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
         if (player.getWave() % 5 == 0 && player.getWave() != 0) {
             enemyList.add(new BossEnemy("Assets/Boss.png", 
@@ -294,6 +317,11 @@ public class Game extends JPanel implements ActionListener {
         return enemyList;
     }
 
+    /**
+     * Checks whether all enemies are killed
+     * @param enemyList The list of all enemies that were spawned in the wave
+     * @return A boolean of whether all the enemies of the waves dies (false) or if there are some left (true)
+     */
     public boolean areThereMoreEnemies(ArrayList<Enemy> enemyList) {
         for (Enemy e : enemyList) {
             if (e.getIsAlive()) {
@@ -304,6 +332,9 @@ public class Game extends JPanel implements ActionListener {
         return false;
     }
 
+    /**
+     * 
+     */
     void buttonListeners() {
         exitButton.addActionListener(new ActionListener() {
 
@@ -317,6 +348,12 @@ public class Game extends JPanel implements ActionListener {
         });
     }
 
+    /**
+     * Checks if an int array is within an int array arrayList
+     * @param arrayList An int array array list
+     * @param array The int array that needs to be found
+     * @return A boolean whether the int array is within the array list
+     */
     public boolean contains(ArrayList<int[]> arrayList, int[] array) {
         for (int[] arr : arrayList) {
             if (arr[0] == array[0] && arr[1] == array[1]) {
