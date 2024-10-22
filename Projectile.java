@@ -18,7 +18,7 @@ public class Projectile {
      * @param x The x posistion of the projectile
      * @param y The initial y posistion of the projectile
      */
-    public Projectile(int x, int y) {
+    public Projectile(int x, int y, int d) {
 
         this.X = x;
         this.y = y;
