@@ -2,27 +2,47 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+ * 
+ */
+
 public class Projectile {
     private final int SPEED = 10;
     private final int X;
     private int y;
     private Rectangle rectangle;
 
+    /**
+     * The constructor for the Projectile class
+     * @param x The x posistion of the projectile
+     * @param y The initial y posistion of the projectile
+     */
     public Projectile(int x, int y) {
         this.X = x;
         this.y = y;
     }
 
+    /**
+     * shifts the projectile up (used to update player projectiles)
+     */
     public void update() {
         y -= SPEED;
         rectangle = new Rectangle(X, y, 10, 30);
     }
 
+    /**
+     * shifts the projectile down (used to update enemy projectiles)
+     */
     public void updateEnemyProjectile() {
         y += SPEED;
         rectangle = new Rectangle(X, y, 5, 15);
     }
 
+    /**
+     * Draws the projectile to the screen
+     * @param g The graphics for the panel
+     * @param type The type of projectile that needs to be drawn
+     */
     public void draw(Graphics g, int type) {
         Toolkit t = Toolkit.getDefaultToolkit();
         switch (type) {
@@ -36,6 +56,8 @@ public class Projectile {
                 break;
         }
     } 
+
+    //Getters and Setters
 
     public Rectangle getRectangle() {
         return rectangle;

@@ -2,6 +2,10 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+/*
+ * 
+ */
+
 public class Player {
     private final int SPEED = 10;
     private final int Y;
@@ -13,7 +17,12 @@ public class Player {
     private Rectangle rectangle;
     private Image playerImage;
 
-
+    /**
+     * Constructor for the Player class
+     * @param startX The initial x posistion of the player 
+     * @param startY The y posistion of the player
+     * @param width The width of the screen
+     */
     public Player(int startX, int startY, int width){
         this.x = startX;
         this.Y = startY;
@@ -24,6 +33,11 @@ public class Player {
         Toolkit t = Toolkit.getDefaultToolkit();
         playerImage = t.getImage("Assets/Player.png");
     }
+
+    /**
+     * Shifts the Player left or right, while not letting the player go of the screen
+     * @param dir The direction the player need to move in
+     */
 
     public void move(boolean dir){
         if(dir){
@@ -40,9 +54,15 @@ public class Player {
         rectangle = new Rectangle(x, Y, 50, 50);
     }
 
+    /**
+     * Draws the player to the screen
+     * @param g The graphics of the panel
+     */
     public void draw(Graphics g){
         g.drawImage(playerImage, x, Y, null);
     }
+
+    //Getters and Setters
 
     public int getX(){
         return x;

@@ -13,11 +13,11 @@ class Menu implements ActionListener {
 
     void buildMenu() {
         JLabel title = new JLabel("SPACESHIP", SwingConstants.CENTER);
-        Font titleFont = new Font("Serif", Font.BOLD, 50);
+        Font titleFont = new Font("Dialog", Font.BOLD, 50);
         title.setFont(titleFont);
         title.setPreferredSize(new Dimension(1080, 100));
         title.setOpaque(true);
-        title.setBackground(Color.RED);
+        title.setBackground(Color.decode("#117E8E"));
         frame.getContentPane().add(title, BorderLayout.PAGE_START);
         frame.setPreferredSize(new Dimension(1080, 720));
         
@@ -26,15 +26,16 @@ class Menu implements ActionListener {
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         buttonPanel.add(Box.createRigidArea(new Dimension(220, 100)));
 
-        playButton = new JButton("PLAY");
-        quitButton = new JButton("QUIT");
+        Toolkit t=Toolkit.getDefaultToolkit();
+        playButton = new JButton();
+        playButton.setIcon(new ImageIcon(t.getImage("Assets/play.png")));
+        playButton.setBackground( Color.BLACK );
+        playButton.setBorder(null);
 
-        playButton.setPreferredSize(new Dimension(200, 100));
-
-        playButton.setBackground(Color.WHITE);
-        quitButton.setBackground(Color.WHITE);
-        playButton.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        quitButton.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        quitButton = new JButton();
+        quitButton.setIcon(new ImageIcon(t.getImage("Assets/exit1.png")));
+        quitButton.setBackground(Color.BLACK);
+        quitButton.setBorder(null);
 
         buttonPanel.add(playButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 100)));

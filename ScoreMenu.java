@@ -29,11 +29,11 @@ public class ScoreMenu implements ActionListener{
         setHighScore();
 
         gameOver = new JLabel("GAME OVER!", SwingConstants.CENTER);
-        gameOver.setFont(new Font("Serif", Font.BOLD, 50));
+        gameOver.setFont(new Font("Dialog", Font.BOLD, 50));
 
         gameOver.setPreferredSize(new Dimension(1080, 100));
         gameOver.setOpaque(true);
-        gameOver.setBackground(Color.RED);
+        gameOver.setBackground(Color.decode("#117E8E"));
         frame.getContentPane().add(gameOver, BorderLayout.PAGE_START);
         frame.setSize(new Dimension(1080, 720));
 
@@ -44,25 +44,26 @@ public class ScoreMenu implements ActionListener{
         menuPanel.add(Box.createRigidArea(new Dimension(300, 100)));
         menuPanel.setPreferredSize(new Dimension(frame.getWidth(), frame.getHeight()));
 
+        Toolkit t = Toolkit.getDefaultToolkit();
+
         tryAgainButton = new JButton("TRY AGAIN");
-        backToMenu = new JButton("MAIN MENU");
+        tryAgainButton.setBackground(Color.BLACK);
+        tryAgainButton.setIcon(new ImageIcon(t.getImage("Assets/retry.png")));
+        tryAgainButton.setBorder(null);
 
-        tryAgainButton.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        backToMenu.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        backToMenu = new JButton("");
+        backToMenu.setBackground(Color.BLACK);
+        backToMenu.setIcon(new ImageIcon(t.getImage("Assets/exit2.png")));
+        backToMenu.setBorder(null);
 
-        tryAgainButton.setBackground(Color.WHITE);
-        backToMenu.setBackground(Color.WHITE);
-
-        tryAgainButton.setSize(new Dimension(600, 100));
-        backToMenu.setSize(new Dimension(600, 100));
 
         highScoreText = new JTextField("20");
         highScoreText.setText("Highscore: " + Integer.toString(highScore));
         highScoreText.setBackground(Color.BLACK);
-        highScoreText.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        highScoreText.setFont(new Font("Dialog", Font.BOLD, 40));
         highScoreText.setBorder(BorderFactory.createEmptyBorder());
         highScoreText.setEditable(false);
-        highScoreText.setForeground(Color.WHITE);
+        highScoreText.setForeground(Color.decode("#117E8E"));
         
 
         menuPanel.add(tryAgainButton);
