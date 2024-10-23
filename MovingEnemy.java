@@ -1,20 +1,16 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
  * 
  */
 
-public class MovingEnemy extends Enemy{
-    private int SPEED = 5;
+public class MovingEnemy extends Enemy {
+    private int speed = 5;
     private boolean movingDirection;
-    private final int WIDTH = 1080;
+    private final int width = 1080;
     
     /**
-     * The constructor for the Moving Enemy
+     * The constructor for the Moving Enemy.
      * @param image The path for to the image used to represent the moving enemy
      * @param h The amount of health the enemy has
      * @param d The amount of damage the enemy does
@@ -34,19 +30,19 @@ public class MovingEnemy extends Enemy{
 
     @Override
     public void update() {
-        if (super.getX() > WIDTH - 50) {
+        if (super.getX() > width - 50) {
             movingDirection = !movingDirection;
         } else if (super.getX() < 0) {
             movingDirection = !movingDirection;
         }
 
         if (movingDirection) {
-            super.setX(SPEED);
+            super.setX(speed);
         } else {
-            super.setX(-SPEED);
+            super.setX(-speed);
         }
 
-        super.updateRectangle(40 ,40);
+        super.updateRectangle(40, 40);
     }
 
 }

@@ -25,7 +25,6 @@ public class Game extends JPanel implements ActionListener {
     KeyInput keyInput = new KeyInput();
     Timer timer = new Timer(10, this);
     ArrayList<Enemy> enemies = new ArrayList<>();
-    // private int waveNumber = 1;
 
     /**
      * Creates the game window and panel, also initializes all the actial listeners
@@ -333,9 +332,10 @@ public class Game extends JPanel implements ActionListener {
     }
 
     /**
-     * Checks whether all enemies are killed
+     * Checks whether all enemies are killed.
      * @param enemyList The list of all enemies that were spawned in the wave
-     * @return A boolean of whether all the enemies of the waves dies (false) or if there are some left (true)
+     * @return A boolean of whether all the enemies of 
+     *      the waves dies (false) or if there are some left (true)
      */
     public boolean areThereMoreEnemies(ArrayList<Enemy> enemyList) {
         for (Enemy e : enemyList) {
@@ -364,7 +364,7 @@ public class Game extends JPanel implements ActionListener {
     }
 
     /**
-     * Checks if an int array is within an int array arrayList
+     * Checks if an int array is within an int array arrayList.
      * @param arrayList An int array array list
      * @param array The int array that needs to be found
      * @return A boolean whether the int array is within the array list

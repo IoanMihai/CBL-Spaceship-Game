@@ -1,9 +1,8 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+
 
 class Menu implements ActionListener {
     JFrame frame = new JFrame("SPACESHIP");
@@ -26,10 +25,10 @@ class Menu implements ActionListener {
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         buttonPanel.add(Box.createRigidArea(new Dimension(220, 100)));
 
-        Toolkit t=Toolkit.getDefaultToolkit();
+        Toolkit t = Toolkit.getDefaultToolkit();
         playButton = new JButton();
         playButton.setIcon(new ImageIcon(t.getImage("Assets/play.png")));
-        playButton.setBackground( Color.BLACK );
+        playButton.setBackground(Color.BLACK);
         playButton.setBorder(null);
 
         quitButton = new JButton();

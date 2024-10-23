@@ -1,19 +1,14 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
-import java.util.ArrayList;
-
 /**
  * 
  */
 
 public class BossEnemy extends Enemy{
 
-    private int SPEED = 7;
+    private int speed = 7;
     private boolean movingDirectionX;
     private boolean movingDirectionY;
-    private final int WIDTH = 1080;
-    private final int HEIGHT = 300;
+    private final int width = 1080;
+    private final int height = 300;
     
     /**
      * The constructor for the Boss Enemy
@@ -35,25 +30,25 @@ public class BossEnemy extends Enemy{
      */
     @Override
     public void update() {
-        if (super.getX() > WIDTH - 50 || super.getX() < 0) {
+        if (super.getX() > width - 50 || super.getX() < 0) {
             movingDirectionX = !movingDirectionX;
         }
 
-        if(super.getY() > HEIGHT - 90 || super.getY() < 0) {
+        if (super.getY() > height - 90 || super.getY() < 0) {
             movingDirectionY = !movingDirectionY;
         }
 
 
         if (movingDirectionX) {
-            super.setX(SPEED);
+            super.setX(speed);
         } else {
-            super.setX(-SPEED);
+            super.setX(-speed);
         }
 
-        if(movingDirectionY) {
-            super.setY(SPEED);
+        if (movingDirectionY) {
+            super.setY(speed);
         } else {
-            super.setY(-SPEED);
+            super.setY(-speed);
         }
 
         super.updateRectangle(80, 80);
