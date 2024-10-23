@@ -12,17 +12,18 @@ public class Enemy {
     private Image enemyImage;
     private Rectangle rectangle;
     private boolean isAlive = true;
-    private int SPEED = 5;
-    private final int WIDTH = 1080;
+    private int speed = 5;
+    private final int width = 1080;
     private boolean movingDirection;
     /**
-     * The constuctor for the Enemy class
+     * The constuctor for the Enemy class.
      * @param image The path to the image used to represent the enemy
      * @param h The amount of health the enemy has
      * @param d The amount of damage the enemy does
      * @param initialX The initial x posistion of the enemy
      * @param initialY The initial y posistion of the enemy
      */
+    
     Enemy(String image, int h, int d, int initialX, int initialY) {
         this.health = h;
         this.damage = d;
@@ -34,7 +35,7 @@ public class Enemy {
     }   
 
     /**
-     * updates the enemy on the screen
+     * Updates the enemy on the screen.
      */
     public void update() {
         //shoot projectile or any other things we need to change in the game loop
@@ -102,16 +103,16 @@ public class Enemy {
 
     public void move() {
         
-        if (x > WIDTH - 50) {
+        if (x > width - 50) {
             movingDirection = !movingDirection;
         } else if (x < 0) {
             movingDirection = !movingDirection;
         }
 
         if (movingDirection) {
-            x += SPEED;
+            x += speed;
         } else {
-            x -= SPEED;
+            x -= speed;
         }
     }
 
