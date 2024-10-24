@@ -12,7 +12,7 @@ import javax.swing.*;
  */
 public class Game extends JPanel implements ActionListener {
     //GUI variables
-    private JFrame gameWindow = new JFrame("SBL Space Ship Game");
+    private JFrame gameWindow = new JFrame("CBL Space Ship Game");
     private JPanel healthPanel;
     private JPanel scorePanel;
     private JPanel gamePanel;
