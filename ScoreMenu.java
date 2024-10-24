@@ -20,7 +20,7 @@ public class ScoreMenu {
     private JTextField highScoreText;
 
     /**
-     * Constructor for the score menu
+     * Constructor for the score menu.
      * @param score The players previous score
      */
     ScoreMenu(int score) {
@@ -28,7 +28,7 @@ public class ScoreMenu {
     }
 
     /**
-     * Updates the highscore if the current score is higher
+     * Updates the highscore if the current score is higher.
      */
     private void setHighScore() {
         if (currentScore > highScore) {
@@ -37,7 +37,7 @@ public class ScoreMenu {
     }
 
     /**
-     * Builds the retry menu
+     * Builds the retry menu.
      */
     void buildIt() {
         setHighScore();
@@ -101,7 +101,7 @@ public class ScoreMenu {
     }
 
     /**
-     * Adds a button listener to the buttons
+     * Adds a button listener to the buttons.
      */
     void buttonListeners() {
         tryAgainButton.addActionListener(new ActionListener() {
@@ -122,7 +122,7 @@ public class ScoreMenu {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 frame.dispose();
-                Menu menu = new Menu();
+                Main menu = new Main();
                 menu.buildMenu();
             }
             

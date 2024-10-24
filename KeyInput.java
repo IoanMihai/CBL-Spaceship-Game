@@ -4,13 +4,13 @@ import java.awt.event.*;
  * The key input class implements the key listener class and handels
  * the keyboard inputs.
  */
-public class KeyInput implements KeyListener{
+public class KeyInput implements KeyListener {
     private char key; //The key being pressed
     private char dir; //The direction the player should move
     private int timer; //A timer so the can't spam 'space'
 
     /**
-     * Construtor for the Key Input class, sets all instance variables to the standard value
+     * Construtor for the Key Input class, sets all instance variables to the standard value.
      */
     public KeyInput() {
         key = '\u0000';
@@ -19,7 +19,7 @@ public class KeyInput implements KeyListener{
     }
 
     /**
-     * Gets the key pressed event and assigns inctance variables appropiate values
+     * Gets the key pressed event and assigns inctance variables appropiate values.
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -33,7 +33,7 @@ public class KeyInput implements KeyListener{
     }
 
     /**
-     * Gets the key typed event and assigns inctance variables appropiate values
+     * Gets the key typed event and assigns inctance variables appropiate values.
      */
     @Override
     public void keyTyped(KeyEvent e) { 
@@ -46,7 +46,7 @@ public class KeyInput implements KeyListener{
     }
 
     /**
-     * Gets the key released event and resets the direction
+     * Gets the key released event and resets the direction.
      */
     @Override
     public void keyReleased(KeyEvent e) {
@@ -56,7 +56,7 @@ public class KeyInput implements KeyListener{
     }
 
     /**
-     * resets the key variable to the standard value and resets the timer
+     * resets the key variable to the standard value and resets the timer.
      */
     public void resetKey() {
         key = '\u0000';
@@ -64,7 +64,7 @@ public class KeyInput implements KeyListener{
     }
 
     /**
-     * Reduces the timer by 1
+     * Reduces the timer by 1.
      */
     public void reduceTimer() {
         if (timer > 0) {

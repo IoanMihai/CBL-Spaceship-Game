@@ -23,7 +23,7 @@ public class Upgrades {
     private int type; //Type of upgrade it is
     
     /**
-     * The constructor for the upgrade class
+     * The constructor for the upgrade class.
      * @param initialX The x posistion of the upgrade
      * @param initialY The initial y posistion of the upgrade
      * @param givenType The type of upgrade it is (3 = healing upgrade, 4 = damage upgrade)
@@ -37,7 +37,7 @@ public class Upgrades {
     }
 
     /**
-     * Sets the image to the correct image depending on the type of upgrade
+     * Sets the image to the correct image depending on the type of upgrade.
      */
     private void readImage() {
         switch (type) {
@@ -66,7 +66,7 @@ public class Upgrades {
     }
 
     /**
-     * Updates the upgarde by moving it down
+     * Updates the upgarde by moving it down.
      */
     public void update() {
         y += 3;
@@ -74,7 +74,7 @@ public class Upgrades {
     }
 
     /**
-     * Draws the upgrade to the screen
+     * Draws the upgrade to the screen.
      * @param g the graphics of the panel
      */
     public void draw(Graphics g) {
