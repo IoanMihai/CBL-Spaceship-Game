@@ -1,8 +1,4 @@
 import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
-import java.util.ArrayList;
-import javax.swing.*;
 
 /**
  * The enemy is used to track and update the enemy, it has
@@ -18,15 +14,15 @@ public class Enemy {
     private Image enemyImage;
     private Rectangle rectangle; //Used for collisions
     private boolean isAlive = true;
-
     /**
-     * The constuctor for the Enemy class
+     * The constuctor for the Enemy class.
      * @param image The path to the image used to represent the enemy
      * @param h The amount of health the enemy has
      * @param d The amount of damage the enemy does
      * @param initialX The initial x posistion of the enemy
      * @param initialY The initial y posistion of the enemy
      */
+    
     Enemy(String image, int h, int d, int initialX, int initialY) {
         this.health = h;
         this.damage = d;
@@ -114,5 +110,4 @@ public class Enemy {
     public boolean isAlive() {
         return isAlive;
     }
-
 }

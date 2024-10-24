@@ -1,9 +1,8 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+
 
 /**
  * The main class builds the main menu and creates an instance of the game class
@@ -38,10 +37,11 @@ class Menu {
         buttonPanel.add(Box.createRigidArea(new Dimension(220, 100)));
 
         //Create the play button
-        Toolkit t=Toolkit.getDefaultToolkit();
+        Toolkit t = Toolkit.getDefaultToolkit();
+
         playButton = new JButton();
         playButton.setIcon(new ImageIcon(t.getImage("Assets/play.png")));
-        playButton.setBackground( Color.BLACK );
+        playButton.setBackground(Color.BLACK);
         playButton.setBorder(null);
 
         //Create the quit button

@@ -1,6 +1,4 @@
-import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
 
 /**
  * The key input class implements the key listener class and handels
@@ -25,7 +23,7 @@ public class KeyInput implements KeyListener{
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyChar() == 'a' || e.getKeyChar() == 'd') {
+        if (e.getKeyChar() == 'a' || e.getKeyChar() == 'd') {
             dir = e.getKeyChar();
         } 
         
@@ -39,7 +37,7 @@ public class KeyInput implements KeyListener{
      */
     @Override
     public void keyTyped(KeyEvent e) { 
-        if(e.getKeyChar() == 'a' || e.getKeyChar() == 'd') {
+        if (e.getKeyChar() == 'a' || e.getKeyChar() == 'd') {
             dir = e.getKeyChar();
         }
         if (timer == 0) {
@@ -52,7 +50,7 @@ public class KeyInput implements KeyListener{
      */
     @Override
     public void keyReleased(KeyEvent e) {
-        if(e.getKeyChar() == dir) {
+        if (e.getKeyChar() == dir) {
             dir = '\u0000';
         }
     }
@@ -69,7 +67,7 @@ public class KeyInput implements KeyListener{
      * Reduces the timer by 1
      */
     public void reduceTimer() {
-        if(timer > 0) {
+        if (timer > 0) {
             timer--;
         }
     }

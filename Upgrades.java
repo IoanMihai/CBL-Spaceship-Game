@@ -4,23 +4,21 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+
 
 /**
  * The upgrade class tracks and updates the upgrades, the upgrade has an
  * x and y posistion and a type.
  */
 public class Upgrades {
-    private int WIDTH = 40; //Width of the upgrade
-    private int HEIGHT = 40; //Height of the upgrade
+    private int width = 40; //Width of the upgrade
+    private int height = 40; //Height of the upgrade
     private int x;
     private int y;
     private BufferedImage upgraBufferedImage;
     private Image upgradeImage;
-    private final int HEAL = 10; //how much the healing upgrade heals the player
+    private final int heal = 10; //how much the healing upgrade heals the player
     private Rectangle rectangle; //Used for collisions
     private int type; //Type of upgrade it is
     
@@ -33,7 +31,7 @@ public class Upgrades {
     Upgrades(int initialX, int initialY, int givenType) {
         this.x = initialX;
         this.y = initialY; 
-        this.rectangle = new Rectangle(x, y, WIDTH, HEIGHT);
+        this.rectangle = new Rectangle(x, y, width, height);
         this.type = givenType;
         readImage();
     }
@@ -49,7 +47,7 @@ public class Upgrades {
                 } catch (IOException ex) {
                     System.out.println("No image found for healing asset. ");
                 }
-                upgradeImage = upgraBufferedImage.getScaledInstance(WIDTH, HEIGHT, 
+                upgradeImage = upgraBufferedImage.getScaledInstance(width, height, 
                     Image.SCALE_DEFAULT);
                 break;
             case Constants.DAMAGE_UPGRADE:
@@ -58,7 +56,7 @@ public class Upgrades {
                 } catch (IOException ex) {
                     System.out.println("No image found for healing asset. ");
                 }
-                upgradeImage = upgraBufferedImage.getScaledInstance(WIDTH, HEIGHT, 
+                upgradeImage = upgraBufferedImage.getScaledInstance(width, height, 
                     Image.SCALE_DEFAULT);
                 break;
             default:
@@ -72,7 +70,7 @@ public class Upgrades {
      */
     public void update() {
         y += 3;
-        rectangle = new Rectangle(x, y, WIDTH, HEIGHT);
+        rectangle = new Rectangle(x, y, width, height);
     }
 
     /**
@@ -93,7 +91,7 @@ public class Upgrades {
     }
 
     public int getHealIncrease() {
-        return HEAL;
+        return heal;
     }
 
     public int getUpgradeType() {
