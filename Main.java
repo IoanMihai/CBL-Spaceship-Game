@@ -101,7 +101,15 @@ class Main {
         dmgInfo.setFont(infoFont);
         dmgInfo.setForeground(Color.decode("#117E8E"));
 
+        //Create controls info label
+        JLabel controlsInfo = new JLabel("Use 'A' and 'D' to move and 'Space' to shoot", 
+            SwingConstants.CENTER);
+        controlsInfo.setFont(infoFont);
+        controlsInfo.setForeground(Color.decode("#117E8E"));
+
         //Add all to the info panel in the internal frame
+        iPanel.add(controlsInfo);
+        iPanel.add(Box.createRigidArea(new Dimension(0, 50)));
         iPanel.add(healingIcon);
         iPanel.add(healingInfo);
         iPanel.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -113,7 +121,7 @@ class Main {
         infoFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         infoFrame.setVisible(false);
         infoFrame.setBackground(Color.BLACK);
-        infoFrame.setPreferredSize(new Dimension(500, 350));
+        infoFrame.setPreferredSize(new Dimension(500, 400));
         infoFrame.pack();
 
         //Add all to frame
