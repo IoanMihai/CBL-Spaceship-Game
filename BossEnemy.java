@@ -4,15 +4,16 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * 
+ * The boss enemy is a child of the enemy class, it is now able to move around in 
+ * both x and y direction.
  */
 
 public class BossEnemy extends Enemy{
     private int SPEED = 7;
-    private boolean movingDirectionX;
-    private boolean movingDirectionY;
-    private final int WIDTH = 1080;
-    private final int HEIGHT = 300;
+    private boolean movingDirectionX; //The x direction it is currently moving in
+    private boolean movingDirectionY; //The y direction it is currently moving in
+    private final int WIDTH = 1080; //Corresponds to the width of the game frame
+    private final int HEIGHT = 300; //Ensures the boss never reaches the player
     
     /**
      * The constructor for the Boss Enemy

@@ -2,16 +2,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
-
 import javax.swing.*;
 
-interface EnemyInterface 
-{
-    void spawn();
-}
-
 /**
- * 
+ * The enemy is used to track and update the enemy, it has
+ * an integer health and damage, an x and y posistion, and a
+ * boolean if it's alive.
  */
 
 public class Enemy {
@@ -20,11 +16,9 @@ public class Enemy {
     private int x;
     private int y;
     private Image enemyImage;
-    private Rectangle rectangle;
+    private Rectangle rectangle; //Used for collisions
     private boolean isAlive = true;
-    private int SPEED = 5;
-    private final int WIDTH = 1080;
-    private boolean movingDirection;
+
     /**
      * The constuctor for the Enemy class
      * @param image The path to the image used to represent the enemy
@@ -44,14 +38,42 @@ public class Enemy {
     }   
 
     /**
-     * updates the enemy on the screen
+     * Updates the enemy on the screen
      */
     public void update() {
         //shoot projectile or any other things we need to change in the game loop
         this.updateRectangle(40, 40);
     }
 
-    //getters and setters
+    /**
+     * Draws the enemy to the screen
+     * @param g The graphics of the panel
+     */
+    public void draw(Graphics g) {
+        if (this.isAlive()) {
+            g.drawImage(enemyImage, x, y, null);
+        }
+    }
+
+    /**
+     * Updates the isAlive boolean
+     * @return isAlive
+     */
+    public boolean kill() {
+        if (isAlive) {
+            isAlive = false;
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
+
+    public void updateRectangle(int width, int height) {
+        rectangle = new Rectangle(x, y, width, height);
+    }
+
+    //Getters and Setters
 
     public Rectangle getRectangle() {
         return rectangle;
@@ -89,44 +111,8 @@ public class Enemy {
         this.health = newHealth;
     }
 
-    public void draw(Graphics g) {
-        if (this.isAlive()) {
-            g.drawImage(enemyImage, x, y, null);
-        }
-    }
-
-
     public boolean isAlive() {
         return isAlive;
-    }
-
-    public boolean kill() {
-        if (isAlive) {
-            isAlive = false;
-            return true;
-        } else {
-            return false;
-        }
-        
-    }
-
-    public void move() {
-        
-        if (x > WIDTH - 50) {
-            movingDirection = !movingDirection;
-        } else if (x < 0) {
-            movingDirection = !movingDirection;
-        }
-
-        if (movingDirection) {
-            x += SPEED;
-        } else {
-            x -= SPEED;
-        }
-    }
-
-    public void updateRectangle(int width, int height) {
-        rectangle = new Rectangle(x, y, width, height);
     }
 
 }

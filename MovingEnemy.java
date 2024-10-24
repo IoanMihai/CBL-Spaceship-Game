@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * 
+ * The moving enemy class is a child of the enemy class and it is now able to move
+ * around in the x direction.
  */
 
 public class MovingEnemy extends Enemy{
     private int SPEED = 5;
-    private boolean movingDirection;
-    private final int WIDTH = 1080;
+    private boolean movingDirection; //The x direction it is currently moving in
+    private final int WIDTH = 1080; //Corresponds to the width of the game frame
     
     /**
      * The constructor for the Moving Enemy
