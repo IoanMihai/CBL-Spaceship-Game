@@ -34,7 +34,7 @@ public class Enemy {
     }   
 
     /**
-     * Updates the enemy on the screen
+     * Updates the enemy on the screen.
      */
     public void update() {
         //shoot projectile or any other things we need to change in the game loop
@@ -42,7 +42,7 @@ public class Enemy {
     }
 
     /**
-     * Draws the enemy to the screen
+     * Draws the enemy to the screen.
      * @param g The graphics of the panel
      */
     public void draw(Graphics g) {
@@ -52,7 +52,7 @@ public class Enemy {
     }
 
     /**
-     * Updates the isAlive boolean
+     * Updates the isAlive boolean.
      * @return isAlive
      */
     public boolean kill() {

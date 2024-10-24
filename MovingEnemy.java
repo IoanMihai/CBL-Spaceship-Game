@@ -5,7 +5,7 @@ import java.util.Random;
  * around in the x direction.
  */
 
-public class MovingEnemy extends Enemy{
+public class MovingEnemy extends Enemy {
     private int speed = 5;
     private boolean movingDirection; //The x direction it is currently moving in
     private final int width = 1080; //Corresponds to the width of the game frame

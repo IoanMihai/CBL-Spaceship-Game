@@ -22,16 +22,19 @@ public class Game extends JPanel implements ActionListener {
     private JTextField scoreNumber;
     private JButton exitButton;
     //Game variables
-    private Player player = new Player(490, 500, 1080, Constants.INITIAL_PLAYER_DAMAGE); //The player itself
-    private ArrayList<Projectile> projectiles = new ArrayList<>(); //List of all player projectiles on screen
-    private ArrayList<Projectile> enemyProjectiles = new ArrayList<>(); //List of all enemy projectiles on screen
+    private Player player = new Player(490, 500, 
+        1080, Constants.INITIAL_PLAYER_DAMAGE); //The player itself
+    private ArrayList<Projectile> projectiles = 
+            new ArrayList<>(); //List of all player projectiles on screen
+    private ArrayList<Projectile> enemyProjectiles = 
+            new ArrayList<>(); //List of all enemy projectiles on screen
     private ArrayList<Upgrades> upgrades = new ArrayList<>(); //List of all upgrades on screen
     private KeyInput keyInput = new KeyInput(); //key input to handle the keyboard inputs
     private Timer timer = new Timer(10, this); //Timer for main game loop
     private ArrayList<Enemy> enemies = new ArrayList<>(); //All enemies in the current wave
 
     /**
-     * Creates the game window and panel, also initializes all the actial listeners
+     * Creates the game window and panel, also initializes all the actial listeners.
      */
     public void builIt() {
         SwingUtilities.invokeLater(() -> {
@@ -63,7 +66,7 @@ public class Game extends JPanel implements ActionListener {
     }
 
     /**
-     * Creates a panel which displays the player's score
+     * Creates a panel which displays the player's score.
      */
     public void createScorePanel() {
         //Create the panel
@@ -104,7 +107,7 @@ public class Game extends JPanel implements ActionListener {
     }
     
     /**
-     * Creates a panel which displays the health
+     * Creates a panel which displays the health.
      */
     public void createHealthPanel() {
         //Create the health panel
@@ -133,7 +136,7 @@ public class Game extends JPanel implements ActionListener {
     }
 
     /**
-     * Draws all the game components to the screen
+     * Draws all the game components to the screen.
      */
     @Override
     public void paintComponent(Graphics g) {
@@ -168,7 +171,7 @@ public class Game extends JPanel implements ActionListener {
 
     /**
      * Main Game loop will deal with all the events and update 
-     * all the game components
+     * all the game components.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -309,7 +312,7 @@ public class Game extends JPanel implements ActionListener {
     }
 
     /**
-     * Creates a new wave of enemies
+     * Creates a new wave of enemies.
      * @return list of Enemies
      */
     public ArrayList<Enemy> createEnemies() {
@@ -381,7 +384,7 @@ public class Game extends JPanel implements ActionListener {
     }
 
     /**
-     * Adds a button Listener to the exit button
+     * Adds a button Listener to the exit button.
      */
     void buttonListeners() {
         exitButton.addActionListener(new ActionListener() {
@@ -390,7 +393,7 @@ public class Game extends JPanel implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 gameWindow.setVisible(false);
                 gameWindow.dispose();
-                Menu menu = new Menu();
+                Main menu = new Main();
                 menu.buildMenu();
             }
         });

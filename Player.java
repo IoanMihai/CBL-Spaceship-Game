@@ -1,8 +1,8 @@
 import java.awt.*;
 
-/*
+/**
  * The player clas tracks and updates the player, the player has an x
- * and y posistion, speed, health, damage, score, and a wave counter
+ * and y posistion, speed, health, damage, score, and a wave counter.
  */
 public class Player {
     private final int speed = 10;
@@ -23,7 +23,7 @@ public class Player {
      * @param width The width of the screen
      */
 
-    public Player(int startX, int startY, int width, int initialDamage){
+    public Player(int startX, int startY, int width, int initialDamage) {
         this.x = startX;
         this.y = startY;
         this.width = width;
@@ -98,6 +98,11 @@ public class Player {
         waveCounter++;
     }
 
+    /**
+     * Increases the health of the player.
+     * @param healthIncrease how much the health is increased. If the sum exceeds
+     *      100, then the health will just be set to 100.
+     */
     public void increaseHealth(int healthIncrease) {
         playerHealth = playerHealth + healthIncrease;
         if (playerHealth > 100) {

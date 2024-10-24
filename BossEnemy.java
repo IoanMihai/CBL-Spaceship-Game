@@ -3,7 +3,7 @@
  * both x and y direction.
  */
 
-public class BossEnemy extends Enemy{
+public class BossEnemy extends Enemy {
     private int speed = 7;
     private boolean movingDirectionX; //The x direction it is currently moving in
     private boolean movingDirectionY; //The y direction it is currently moving in
@@ -11,7 +11,7 @@ public class BossEnemy extends Enemy{
     private final int height = 300; //Ensures the boss never reaches the player
     
     /**
-     * The constructor for the Boss Enemy
+     * The constructor for the Boss Enemy.
      * @param image The path of the image used to represent the Boss Enemy
      * @param h The amount of health the Boss Enemy has
      * @param d The amount of damage the Boss Enemy does

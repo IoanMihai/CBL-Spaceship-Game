@@ -8,7 +8,7 @@ import javax.swing.*;
  * The main class builds the main menu and creates an instance of the game class
  * to run the game.
  */
-class Menu {
+class Main {
     //GUI Variables
     private JFrame frame = new JFrame("SPACESHIP");
     private JButton playButton;
@@ -19,7 +19,7 @@ class Menu {
     private JButton infoButton;
 
     /**
-     * Will build the initial menu
+     * Will build the initial menu.
      */
     void buildMenu() {
         //Creates the title
@@ -72,7 +72,7 @@ class Menu {
         infoPanel.add(infoButton);
 
         //Create a panel in the internal frame
-        infoFrame = new JInternalFrame("Information",false,true,true,false);
+        infoFrame = new JInternalFrame("Information", false, true, true, false);
         JPanel iPanel = new JPanel();
         iPanel.setLayout(new BoxLayout(iPanel, BoxLayout.Y_AXIS));
         iPanel.add(Box.createRigidArea(new Dimension(50, 50)));
@@ -81,7 +81,8 @@ class Menu {
         Font infoFont = new Font("Dialog", Font.BOLD, 20);
         //Create healing icon
         JLabel healingIcon = new JLabel();
-        Image healingImage = t.getImage("Assets/hp_potion_x5.png").getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+        Image healingImage = t.getImage("Assets/hp_potion_x5.png")
+            .getScaledInstance(50, 50, Image.SCALE_DEFAULT);
         healingIcon.setIcon(new ImageIcon(healingImage));
 
         //Create healing info label
@@ -91,7 +92,8 @@ class Menu {
         
         //Create damage icon
         JLabel dmgIcon = new JLabel();
-        Image dmgImageInfo = t.getImage("Assets/boost_upgrade.png").getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+        Image dmgImageInfo = t.getImage("Assets/boost_upgrade.png")
+            .getScaledInstance(50, 50, Image.SCALE_DEFAULT);
         dmgIcon.setIcon(new ImageIcon(dmgImageInfo));
 
         //Create damage info label
@@ -129,7 +131,7 @@ class Menu {
     }
 
     /**
-     * Adds button listeners to the buttons
+     * Adds button listeners to the buttons.
      */
     void buttonListeners() {
         
@@ -160,6 +162,6 @@ class Menu {
     }
 
     public static void main(String[] a) {
-        new Menu().buildMenu();
+        new Main().buildMenu();
     }
 }
