@@ -1,14 +1,14 @@
 import java.awt.*;
 
 /**
- * 
+ * The projectile class is used to track and update the projectiles
+ * it has an x and y posistion and a speed.
  */
-
 public class Projectile {
     private final int speed = 10;
     private final int x;
     private int y;
-    private Rectangle rectangle;
+    private Rectangle rectangle; //Used for collisions
     private int damage;
 
     /**

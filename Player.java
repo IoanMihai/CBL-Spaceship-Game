@@ -1,17 +1,18 @@
 import java.awt.*;
 
 /*
- * 
+ * The player clas tracks and updates the player, the player has an x
+ * and y posistion, speed, health, damage, score, and a wave counter
  */
 public class Player {
     private final int speed = 10;
     private final int y;
     private int x;
-    private final int width;
+    private final int width; //The width of the frame the game is in
     private int score;
     private int playerHealth;
-    private int waveCounter;
-    private Rectangle rectangle;
+    private int waveCounter; //Used to scale up the waves in difficulty
+    private Rectangle rectangle; //Used for collisions
     private Image playerImage;
     private int damage;
 

@@ -1,3 +1,7 @@
+/**
+ * The constants class contains all the constantes used in the game can be
+ * accessed in any class.
+ */
 public final class Constants {
     public static final int PLAYER_DEFAULT_PROJECTILE = 1;
     public static final int ENEMY_DEFAULT_PROJECTILE = 2;

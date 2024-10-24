@@ -5,26 +5,30 @@ import java.util.Random;
 import javax.swing.*;
 
 /**
- * 
+ * The game class creates the entire game window and contains the game loop
+ * The class contains an instance of the Player class, an arraylist of the
+ * enemies, enemy projectiles, player projectiles, upgrades, and an instance of
+ * the key input class.
  */
-
 public class Game extends JPanel implements ActionListener {
-    JFrame gameWindow = new JFrame("SBL Space Ship Game");
-    JPanel healthPanel;
-    JPanel scorePanel;
-    JPanel gamePanel;
-    JProgressBar healthBar;
-    JTextField playerHealthText;
-    JTextField playerScoreText;
-    JTextField scoreNumber;
-    JButton exitButton;
-    Player player = new Player(490, 500, 1080, Constants.INITIAL_PLAYER_DAMAGE);
-    ArrayList<Projectile> projectiles = new ArrayList<>();
-    ArrayList<Projectile> enemyProjectiles = new ArrayList<>();
-    ArrayList<Upgrades> upgrades = new ArrayList<>();
-    KeyInput keyInput = new KeyInput();
-    Timer timer = new Timer(10, this);
-    ArrayList<Enemy> enemies = new ArrayList<>();
+    //GUI variables
+    private JFrame gameWindow = new JFrame("SBL Space Ship Game");
+    private JPanel healthPanel;
+    private JPanel scorePanel;
+    private JPanel gamePanel;
+    private JProgressBar healthBar;
+    private JTextField playerHealthText;
+    private JTextField playerScoreText;
+    private JTextField scoreNumber;
+    private JButton exitButton;
+    //Game variables
+    private Player player = new Player(490, 500, 1080, Constants.INITIAL_PLAYER_DAMAGE); //The player itself
+    private ArrayList<Projectile> projectiles = new ArrayList<>(); //List of all player projectiles on screen
+    private ArrayList<Projectile> enemyProjectiles = new ArrayList<>(); //List of all enemy projectiles on screen
+    private ArrayList<Upgrades> upgrades = new ArrayList<>(); //List of all upgrades on screen
+    private KeyInput keyInput = new KeyInput(); //key input to handle the keyboard inputs
+    private Timer timer = new Timer(10, this); //Timer for main game loop
+    private ArrayList<Enemy> enemies = new ArrayList<>(); //All enemies in the current wave
 
     /**
      * Creates the game window and panel, also initializes all the actial listeners
@@ -59,19 +63,23 @@ public class Game extends JPanel implements ActionListener {
     }
 
     /**
-     * 
+     * Creates a panel which displays the player's score
      */
     public void createScorePanel() {
+        //Create the panel
         scorePanel = new JPanel();
         scorePanel.setLayout(new BoxLayout(scorePanel, BoxLayout.X_AXIS));
         scorePanel.setBackground(Color.decode("#117E8E"));
+
+        //Create the "score" text
         playerScoreText = new JTextField(5);
         playerScoreText.setText("Score:");
         playerScoreText.setBackground(Color.decode("#117E8E"));
         playerScoreText.setFont(new Font("Dialog", Font.BOLD, 20));
         playerScoreText.setBorder(BorderFactory.createEmptyBorder());
         playerScoreText.setEditable(false);
-        scorePanel.add(playerScoreText);
+
+        //Create the score number text
         scorePanel.add(Box.createRigidArea(new Dimension(50, 30)));
         scoreNumber = new JTextField(5);
         scoreNumber.setBackground(Color.decode("#117E8E"));
@@ -79,32 +87,44 @@ public class Game extends JPanel implements ActionListener {
         scoreNumber.setFont(new Font("Dialog", Font.BOLD, 20));
         scoreNumber.setBorder(BorderFactory.createEmptyBorder());
         scoreNumber.setEditable(false);
-        scorePanel.add(scoreNumber);
+
+        //create the exit button
         exitButton = new JButton();
         exitButton.setBackground(Color.WHITE);
         Toolkit t = Toolkit.getDefaultToolkit();
         exitButton.setIcon(new ImageIcon(t.getImage("Assets/exit3.png")));
         exitButton.setBorder(BorderFactory.createEmptyBorder());
         exitButton.setFont(new Font("Dialog", Font.BOLD, 20));
+
+        //Add everything to the panel
+        scorePanel.add(playerScoreText);
+        scorePanel.add(scoreNumber);
         scorePanel.add(exitButton);
         scorePanel.add(Box.createRigidArea(new Dimension(50, 30)));
     }
     
     /**
-     * 
+     * Creates a panel which displays the health
      */
     public void createHealthPanel() {
+        //Create the health panel
         healthPanel = new JPanel();
         healthPanel.setLayout(new BoxLayout(healthPanel, BoxLayout.X_AXIS));
         healthBar = new JProgressBar();
+
+        //create the "health" text
         playerHealthText = new JTextField(8);
         playerHealthText.setText("Health:");
         playerHealthText.setBackground(Color.decode("#117E8E"));
         playerHealthText.setFont(new Font("Dialog", Font.BOLD, 20));
         playerHealthText.setBorder(BorderFactory.createEmptyBorder());
         playerHealthText.setEditable(false);
+
+        //create the health bar
         healthBar.setPreferredSize(new Dimension(300, 30));
         healthBar.setValue(100);
+
+        //Add all to the panel
         healthPanel.add(playerHealthText);
         healthPanel.add(Box.createRigidArea(new Dimension(300, 30)));
         healthPanel.add(healthBar);
@@ -113,7 +133,7 @@ public class Game extends JPanel implements ActionListener {
     }
 
     /**
-     * 
+     * Draws all the game components to the screen
      */
     @Override
     public void paintComponent(Graphics g) {
@@ -147,13 +167,15 @@ public class Game extends JPanel implements ActionListener {
     }
 
     /**
-     * 
+     * Main Game loop will deal with all the events and update 
+     * all the game components
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         keyInput.reduceTimer();
         healthBar.setValue(player.getHealth());
 
+        //get the key being pressed and move the player or spawn a projectile
         char keyPressed = keyInput.getKey();
         char direction = keyInput.getDir();
         if (direction == 'a') {
@@ -166,13 +188,15 @@ public class Game extends JPanel implements ActionListener {
             keyInput.resetKey();
         }
 
+        //update all the upgrades
         for (Upgrades upgrade : upgrades) {
             upgrade.update();
         }
- 
+        
+        //Update all the enemies
         for (Enemy enemy : enemies) {
             enemy.update();
-
+            //Spawn enemy projectiles
             if (enemy.isAlive()) {
                 if (enemy instanceof BossEnemy) {
                     if (enemy.getX() % 20 == 0) {
@@ -186,7 +210,6 @@ public class Game extends JPanel implements ActionListener {
                 }
             }
 
-
             if (enemy.isAlive() && (enemy.getX() < player.getX() + 10 
                 && enemy.getX() > player.getX() - 10)) {
                 enemyProjectiles.add(new Projectile(enemy.getX() + 17, 
@@ -194,7 +217,7 @@ public class Game extends JPanel implements ActionListener {
             }
         }
 
-
+        //Update the projectiles
         ArrayList<Projectile> tempProjectiles = new ArrayList<>();
         for (Projectile projectile: projectiles) {
             projectile.update();
@@ -202,7 +225,7 @@ public class Game extends JPanel implements ActionListener {
                 tempProjectiles.add(projectile);
             }
 
-
+            //Detect a collision with an enemy
             if (projectile.getRectangle() != null) {
                 for (Enemy enemy : enemies) {
                     if (enemy.getRectangle() != null) {
@@ -230,14 +253,16 @@ public class Game extends JPanel implements ActionListener {
                 }
             }
         }
-
+        
+        //Update the enemy projectiles
         ArrayList<Projectile> tempEnemyProjectiles = new ArrayList<>();
         for (Projectile enemProjectile : enemyProjectiles) {
             enemProjectile.updateEnemyProjectile();
             if (enemProjectile.getY() >= 0) {
                 tempEnemyProjectiles.add(enemProjectile);
             }
-
+            
+            //Detect a collision with the player
             if (enemProjectile.getRectangle() != null) {
                 if (enemProjectile.getRectangle().intersects(player.getRectangle())) {
                     player.decreaseHealth(enemProjectile.getDamage());
@@ -250,6 +275,8 @@ public class Game extends JPanel implements ActionListener {
             enemies.clear();
             enemies = createEnemies();
         }
+
+        //Detect collision with upgrades
         ArrayList<Upgrades> tempUpgrades = new ArrayList<>();
         for (Upgrades upgrade : upgrades) {
             if (upgrade != null) {
@@ -272,42 +299,51 @@ public class Game extends JPanel implements ActionListener {
                 }
             }
         }
+        
+        //Set all lists
         upgrades = tempUpgrades;
         enemyProjectiles = tempEnemyProjectiles;
         projectiles = tempProjectiles;
+        //Update the window
         gameWindow.repaint();
     }
 
     /**
-     * 
-     * @return
+     * Creates a new wave of enemies
+     * @return list of Enemies
      */
     public ArrayList<Enemy> createEnemies() {
         ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
         if (player.getWave() % 5 == 0 && player.getWave() != 0) {
+            //Spawn a boss
             enemyList.add(new BossEnemy("Assets/Boss.png", 
                 player.getWave() * 100, player.getWave() * 3 + 1, 100, 100));
         } else {
+            //Spawn a wave
             Random random = new Random();
             ArrayList<int[]> posistions = new ArrayList<>();
+            //Spawn all moving enemies
             for (int i = 0; i <= player.getWave() - random.nextInt(10) - 3 && i < 9;  i++) {
                 int[] pos = new int[] {random.nextInt(10), 30};
 
+                //Ensure none overlap
                 while (contains(posistions, pos)) {
                     pos[0]++;
                     if (pos[0] >= 10) {
                         pos[0] = 0;
                     }
                 } 
-
                 posistions.add(pos);
 
+                //Spawn the enemy
                 enemyList.add(new MovingEnemy("Assets/MovingEnemy.png", 
                     player.getWave() * 3 + 1, player.getWave() + 1, pos[0] * 100 + 100, pos[1]));
             }
+            //Spawn all regular enemies
             for (int i = 0; i <= player.getWave() / 2 - random.nextInt(5) + 5 && i < 18;  i++) {
                 int[] pos = new int[] {random.nextInt(10), random.nextInt(2)};
 
+                //Ensure none overlap
                 while (contains(posistions, pos)) {
                     pos[0]++;
                     if (pos[0] >= 10 && pos[1] == 1) {
@@ -318,16 +354,13 @@ public class Game extends JPanel implements ActionListener {
                         pos[1] = 1;
                     }
                 } 
-                
                 posistions.add(pos);
                 
+                //spawn the enemy
                 enemyList.add(new Enemy("Assets/BasicEnemy.png", player.getWave() * 3 + 1, 
                     player.getWave() + 1, pos[0] * 100 + 100, pos[1] * 100 + 130));
             }
         }
-            
-
-        //enemyList.add(new BossEnemy(10, 10, 100, 100));
         return enemyList;
     }
 
@@ -348,7 +381,7 @@ public class Game extends JPanel implements ActionListener {
     }
 
     /**
-     * 
+     * Adds a button Listener to the exit button
      */
     void buttonListeners() {
         exitButton.addActionListener(new ActionListener() {

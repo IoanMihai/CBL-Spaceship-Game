@@ -1,14 +1,14 @@
 /**
- * 
+ * The boss enemy is a child of the enemy class, it is now able to move around in 
+ * both x and y direction.
  */
 
 public class BossEnemy extends Enemy{
-
     private int speed = 7;
-    private boolean movingDirectionX;
-    private boolean movingDirectionY;
-    private final int width = 1080;
-    private final int height = 300;
+    private boolean movingDirectionX; //The x direction it is currently moving in
+    private boolean movingDirectionY; //The y direction it is currently moving in
+    private final int width = 1080; //Corresponds to the width of the game frame
+    private final int height = 300; //Ensures the boss never reaches the player
     
     /**
      * The constructor for the Boss Enemy
