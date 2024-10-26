@@ -121,7 +121,7 @@ class Main {
         infoFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         infoFrame.setVisible(false);
         infoFrame.setBackground(Color.BLACK);
-        infoFrame.setPreferredSize(new Dimension(500, 400));
+        infoFrame.setPreferredSize(new Dimension(550, 400));
         infoFrame.pack();
 
         //Add all to frame
